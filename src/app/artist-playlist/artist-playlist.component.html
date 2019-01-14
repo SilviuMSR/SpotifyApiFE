@@ -1,0 +1,9 @@
+<app-header></app-header>
+
+
+<div class="content">
+  <h2><b>{{albumName}} album</b></h2>
+  <div class="row">
+    <app-song-description  *ngFor="let song of topTracks" [song]="song"></app-song-description> 
+  </div> 
+</div>
