@@ -1,5 +1,5 @@
 
-  <div class="content">
+  <!--<div class="content">
     <h2 *ngIf="!isLoggedIn()" style="margin:auto; text-align: center; padding:10px;"><b>Welcome to BS Spotify!</b></h2>
     <h2 *ngIf="isLoggedIn()" style="text-align: center;"><b>Suggested albums</b></h2>
     <h4 *ngIf="!isLoggedIn()" style="text-align: center; margin:auto;">In order to access the application, please login!</h4>
@@ -10,8 +10,29 @@
           Login
       </button>
 
-  </div>
-   
+  </div>-->
+
+
+  <div class="row">
+      <div class="sidebar" style="background-color:#aaa;">
+        <h2>Welcome to BS Spotify</h2>
+        <a href="#">Artists</a>
+        <a href="#">Albums</a>
+        <a href="#">Tracks</a>
+        <a href="#" style="margin-top: 400px;">Login</a>
+      </div> 
+      <div class="informations" style="background-color:#bbb;">
+          <div class="album" style="background-color:red;">
+            Here will be album section with search and other
+          </div>
+          <div class="artist" style="background-color: blue;">
+              Here will be track section with search and other
+          </div>
+          <div class="track" style="background-color: green;">
+              Here will be artist section with search and other
+          </div>
+      </div>
+    </div>
 
 
 
