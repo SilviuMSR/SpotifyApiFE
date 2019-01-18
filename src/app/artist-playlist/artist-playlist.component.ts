@@ -36,7 +36,7 @@ export class ArtistPlaylistComponent implements OnInit {
   getArtistTrack() {
     this.spotifyService.getArtistTopTracks(this.id).subscribe(res => {
       this.topTracks = res.tracks;
-      this.albumName = this.topTracks[0].album.name;
+      //this.albumName = this.topTracks[0].album.name;
     });
   }
 

@@ -16,7 +16,7 @@ export class SongDescriptionComponent implements OnInit {
   }
 
   playSong() {
-    location.href = this.song.preview_url;
+    //location.href = this.song.preview_url;
   }
 
 }

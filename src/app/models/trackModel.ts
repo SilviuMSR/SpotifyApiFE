@@ -2,10 +2,11 @@ import { Artist } from './artistModel';
 import { Album } from './album';
 
 export class Track {
-    album: Album;
+    id : number;
+    albumId : number;
     artists: Artist[];
     name: string;
-    track_number: number;
+    trackNumber: number;
     href: string; 
-    preview_url: string;
+    previewUrl: string;
 }

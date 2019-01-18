@@ -1,5 +1,48 @@
-<p>
-  login works!
-</p>
+<!--<div class="row">
+    <div class="sidebar" style="background-color:#aaa;">
+      <h2>Welcome to BS Spotify</h2>
+      <a href="#">Artists</a>
+      <a href="#">Albums</a>
+      <a href="#">Tracks</a>
+      <a href="#" style="margin-top: 400px;">Login</a>
+    </div> 
+    <div class="informations">
+      <form>
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+        
+            <button type="submit">Login</button>
+            <a href="/reg">Need an account? Create one.</a>
+        </div>
+      </form>
+    </div>
+  </div>-->
 
-<button class="btn btn-dark" (click)="onLogin()">Login</button>
+  <header>
+      <div class="main">
+        <div class="logo">
+          <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
+        </div>
+        <ul>
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Albums</a></li>
+          <li><a href="#">Tracks</a></li>
+          <li><a href="#">Artists</a></li>
+        </ul>
+      </div>
+      <div class="forms">
+        <form>
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+        
+            <input type="submit" value="SUBMIT" routerLink="/after">
+        </form>
+      </div>
+    </header>

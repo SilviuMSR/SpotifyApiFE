@@ -13,26 +13,71 @@
   </div>-->
 
 
-  <div class="row">
-      <div class="sidebar" style="background-color:#aaa;">
-        <h2>Welcome to BS Spotify</h2>
+  <!--<div class="row">
+      <div class="sidebar" style="background-color:black;">
+        <h2 style="color:white">Welcome to BS Spotify</h2>
         <a href="#">Artists</a>
         <a href="#">Albums</a>
         <a href="#">Tracks</a>
-        <a href="#" style="margin-top: 400px;">Login</a>
+        <a href="/login" style="margin-top: 400px;">Login</a>
       </div> 
-      <div class="informations" style="background-color:#bbb;">
-          <div class="album" style="background-color:red;">
-            Here will be album section with search and other
+      <div class="informations" style="background-color: darkgray;">
+          <div class="album" >
+            <div class="jumbotron" style="background-color: darkgray;">
+                <div class="head">
+                    <input id="filter" type="text" [(ngModel)]="albumToSearch" placeholder="Search album" />
+                    <i id="searchbutton" class="fa fa-search" (click)="getAlbumByName()"></i>
+                  <h3>Top albums</h3>
+                </div>
+
+                <app-albums *ngFor="let album of topAlbums" [album]="album" (click)="generateAlbumContent(album)"></app-albums>
+            </div>
           </div>
-          <div class="artist" style="background-color: blue;">
-              Here will be track section with search and other
+          <div class="artist" >
+            <div class="jumbotron" style="background-color: darkgray;">
+                <div class="head">
+                    <input type="text" [(ngModel)]="artistToSearch" placeholder="Search artist...">
+                    <i id="searchbutton" (click)="getArtistByName()" class="fa fa-search"></i>
+                    <h3>Top artists</h3>
+                  </div>
+
+              <app-artists *ngFor="let artist of topArtists" [artist]="artist" (click)="generateArtistContent(artist)"></app-artists>
+            </div>
           </div>
-          <div class="track" style="background-color: green;">
-              Here will be artist section with search and other
+          <div class="track">
+            <div class="jumbotron" style="background-color: darkgray;">
+                <div class="head">
+                    <input type="text" [(ngModel)]="trackToSearch" placeholder="Search track...">
+                    <i id="searchbutton" (click)="getTrackByName()" class="fa fa-search"></i>
+                    <h3>Top tracks</h3>
+                  </div>
+                  <app-tracks *ngFor="let track of topTracks" [track]="track" (click)="generateTrackContent(track)"></app-tracks>
+                  
+            </div>
           </div>
       </div>
+    </div>-->
+
+  <header>
+    <div class="main">
+      <div class="logo">
+        <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
+      </div>
+      <ul>
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">Albums</a></li>
+        <li><a href="#">Tracks</a></li>
+        <li><a href="#">Artists</a></li>
+      </ul>
     </div>
+    <div class="title">
+      <h1>BS Spotify<br>Enjoy free music.</h1>
+    </div>
+    <div class="button">
+      <a href="/login" class="btn">LOGIN</a>
+      <a href="/reg" class="btn">SIGN UP</a>
+    </div>
+  </header>
 
 
 
