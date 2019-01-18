@@ -14,7 +14,6 @@ import { ArtistPlaylistComponent } from './artist-playlist/artist-playlist.compo
 import { SongDescriptionComponent } from './song-description/song-description.component';
 import { LoginComponent } from './login/login.component';
 import { RegComponent } from './reg/reg.component';
-import {MatCardModule} from '@angular/material/card';
 import { AlbumsComponent } from './albums/albums.component';
 import { AlbumDescriptionComponent } from './album-description/album-description.component';
 import { ArtistsComponent } from './artists/artists.component';
@@ -22,6 +21,7 @@ import { ArtistdescriptionComponent } from './artistdescription/artistdescriptio
 import { TracksComponent } from './tracks/tracks.component';
 import { TrackDescriptionComponent } from './track-description/track-description.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,8 @@ import { AfterLoginComponent } from './after-login/after-login.component';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    MatCardModule
+    AngularFontAwesomeModule
+
 
 
   ],

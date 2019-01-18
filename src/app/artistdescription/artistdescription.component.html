@@ -1,8 +1,29 @@
-{{artist.id}}
-{{artist.name}}
-
-Tracks:
-
-<div *ngFor="let track of tracks">
-    {{track.name}}
-</div>
+<header [style.background-image]="backgroundStyle">
+        <div class="main">
+            <div class="logo">
+                <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
+            </div>
+        </div>
+        <ul>
+            <li><a href="/artistdescription/{{artist.id}}">PLAYLIST</a></li>
+            <li><a href="/artistdescription/{{artist.id}}">ABOUT</a></li>
+            <li class="back"><a href="/after">BACK</a></li>
+        </ul>
+        <div class="title">
+            <h1>{{this.artist.name}}</h1>
+        </div>
+        <table id="trackpart">
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Track name</th>
+                    <th>Love it?</th>
+                </tr> 
+                <tr *ngFor="let track of tracks">
+                    <th>1</th>
+                    <th>Play</th>
+                    <th>{{track.name}}</th>
+                    <th><i class="fa fa-heart-o" style="font-size:48px;color:red"></i></th>
+                </tr>
+            </table>
+    </header>

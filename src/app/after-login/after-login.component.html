@@ -11,7 +11,7 @@
       </ul>
     </div>
       <div class="album">
-      <app-albums *ngFor="let album of topAlbums" [album]="album" (click)="generateAlbumContent(album)"></app-albums>
+        <app-albums *ngFor="let album of topAlbums" [album]="album" (click)="generateAlbumContent(album)"></app-albums>
       </div>
       <div class="track">
         <app-tracks *ngFor="let track of topTracks" [track]="track" (click)="generateTrackContent(track)"></app-tracks>
