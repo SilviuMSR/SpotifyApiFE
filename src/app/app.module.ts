@@ -22,6 +22,10 @@ import { TracksComponent } from './tracks/tracks.component';
 import { TrackDescriptionComponent } from './track-description/track-description.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { AllalbumsComponent } from './allalbums/allalbums.component';
+import { AlltracksComponent } from './alltracks/alltracks.component';
+import { AllartistsComponent } from './allartists/allartists.component';
+import * as _ from 'underscore';
 
 @NgModule({
   declarations: [
@@ -38,16 +42,18 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome';
     ArtistdescriptionComponent,
     TracksComponent,
     TrackDescriptionComponent,
-    AfterLoginComponent
+    AfterLoginComponent,
+    AllalbumsComponent,
+    AlltracksComponent,
+    AllartistsComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES),
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AngularFontAwesomeModule
-
-
+    AngularFontAwesomeModule,
+    
 
   ],
   providers: [  ],

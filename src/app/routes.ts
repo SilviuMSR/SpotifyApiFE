@@ -8,6 +8,9 @@ import { AlbumDescriptionComponent } from './album-description/album-description
 import { ArtistdescriptionComponent } from './artistdescription/artistdescription.component';
 import { TrackDescriptionComponent } from './track-description/track-description.component';
 import { AfterLoginComponent } from './after-login/after-login.component';
+import { AllalbumsComponent } from './allalbums/allalbums.component';
+import { AllartistsComponent } from './allartists/allartists.component';
+import { AlltracksComponent } from './alltracks/alltracks.component';
 
 export const ROUTES = [
     { path: '',  component: HomeComponent },
@@ -17,5 +20,8 @@ export const ROUTES = [
     { path: 'albumdescription/:id', component: AlbumDescriptionComponent},
     { path: 'trackdescription/:id', component : TrackDescriptionComponent},
     { path: 'after', component: AfterLoginComponent},
+    { path: 'allalbums', component: AllalbumsComponent},
+    { path: 'allartists', component: AllartistsComponent},
+    { path: 'alltracks', component: AlltracksComponent},
     { path: '**', component: NotFoundComponent }
 ];

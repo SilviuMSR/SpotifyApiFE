@@ -1,0 +1,46 @@
+<header>
+    <div class="main">
+        <div class="logo">
+          <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
+        </div>
+        <ul>
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="#">Albums</a></li>
+          <li><a href="#">Tracks</a></li>
+          <li><a href="#">Artists</a></li>
+        </ul>
+      </div>
+    <div>
+    <h2>Current available albums</h2>
+    <div class="row">
+        <div class="text-center" style="margin-top:100px;">
+            <!-- items being paged -->
+            <div class="column" *ngFor="let item of pagedItems">
+                <fa name="plus"></fa>
+                <img src="{{item.imgUri}}" alt="" width="150" height="150" (click)="getAlbumContent(item)">
+            </div>
+
+            <!-- pager -->
+            <ul *ngIf="pager.pages && pager.pages.length" class="pagination" style="position: absolute; left:10%; top:100%;">
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(1)">First</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === 1}">
+                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+                </li>
+                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                    <a (click)="setPage(page)">{{page}}</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
+                </li>
+                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                    <a (click)="setPage(pager.totalPages)">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <hr />
+</div>
+</header>
+

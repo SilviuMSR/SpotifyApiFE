@@ -6,6 +6,7 @@ import { LoginService } from '../servicies/login.service';
 import { SpotifyServiceService } from '../servicies/spotify-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../servicies/api.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-after-login',
@@ -13,14 +14,6 @@ import { ApiService } from '../servicies/api.service';
   styleUrls: ['./after-login.component.css']
 })
 export class AfterLoginComponent implements OnInit {
-
-  searchAlbum : Album;
-  searchTrack : Track;
-  searchArtist : Artist;
-
-  albumToSearch : string;
-  artistToSearch : string;
-  trackToSearch : string;
   
   topArtists : Artist[];
   topAlbums : Album[];
@@ -36,9 +29,42 @@ export class AfterLoginComponent implements OnInit {
 
     ngOnInit() {
       //this.getRecGenres();
-      this.getTopArtists();
-      this.getTopAlbums();
-      this.getTopTracks();
+     this.getTopArtists();
+     this.getTopAlbums();
+     this.getTopTracks();
+
+      $("#slideshow > div:gt(0)").hide();
+
+      setInterval(function() {
+        $('#slideshow > div:first')
+          .fadeOut(1000)
+          .next()
+          .fadeIn(1000)
+          .end()
+          .appendTo('#slideshow');
+      }, 3000);
+
+      $("#slideshow1 > div:gt(0)").hide();
+
+      setInterval(function() {
+        $('#slideshow1 > div:first')
+          .fadeOut(1000)
+          .next()
+          .fadeIn(1000)
+          .end()
+          .appendTo('#slideshow1');
+      }, 3000);
+
+      $("#slideshow2 > div:gt(0)").hide();
+
+      setInterval(function() {
+        $('#slideshow2 > div:first')
+          .fadeOut(1000)
+          .next()
+          .fadeIn(1000)
+          .end()
+          .appendTo('#slideshow2');
+      }, 3000);
     }
   
     getTopArtists(){
@@ -76,29 +102,20 @@ export class AfterLoginComponent implements OnInit {
     {
       this.router.navigate(['trackdescription/' + track.id]);
     }
-  
-    getAlbumByName()
+
+    goToAlbums()
     {
-      this.apiService.get('/album/byName/' + this.albumToSearch).subscribe((value : any) => {
-        this.searchAlbum = value;
-        this.router.navigate(['albumdescription/' + this.searchAlbum[0].id]);
-      })
+      this.router.navigate(['allalbums']);
     }
-  
-    getArtistByName()
+    
+    goToTracks()
     {
-      this.apiService.get('/artist/byName/' + this.artistToSearch).subscribe((value : any) => {
-        this.searchArtist = value;
-        this.router.navigate(['artistdescription/' + this.searchArtist[0].id]);
-      })
+      this.router.navigate(['alltracks']);
     }
-  
-    getTrackByName()
+
+    goToArtists()
     {
-      this.apiService.get('/track/byName/' + this.trackToSearch).subscribe((value : any) => {
-        this.searchTrack = value;
-        this.router.navigate(['trackdescription/' + this.searchTrack[0].id]);
-      })
+      this.router.navigate(['allartists']);
     }
 
 }

@@ -37,11 +37,12 @@ export class AlbumDescriptionComponent implements OnInit {
   {
     this.apiService.get('/album/' + id).subscribe((value : any) => {
       this.album = value;
-      this.apiService.get('/track/byAlbum/' + id).subscribe((t : any) => {
+      this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.album.imgUri})`);
+      /*this.apiService.get('/track/byAlbum/' + id).subscribe((t : any) => {
         this.tracks = t;
         this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.album.imgUri})`)
         console.log(this.backgroundStyle)
-      })
+      })*/
     })
   }
 
