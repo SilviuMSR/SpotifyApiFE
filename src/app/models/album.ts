@@ -2,7 +2,7 @@ import { Artist } from './artistModel';
 
 export class Album 
 {
-    id: number;
+    albumId: number;
     name: string;
     type: string;
     imgUri : string;

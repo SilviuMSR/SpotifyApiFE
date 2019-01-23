@@ -10,6 +10,7 @@ import { User } from '../models/userModel';
 import { SeedAndTracks } from '../models/seedAndTracks';
 import { IDataService } from './dataService.interface';
 import { Song } from '../models/Song';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,10 +21,26 @@ export class SpotifyServiceService implements IDataService {
   private redirectUri = 'http://localhost:4200';
   private spotifyAuthorizeUrl = 'https://accounts.spotify.com/authorize';
   private spotifyBaseApiUrl = 'https://api.spotify.com/v1/';
+  neededToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDgyMzc1NDgsImV4cCI6MTU0ODMyMzk0OCwiaWF0IjoxNTQ4MjM3NTQ4fQ._kSOAN36ibMIaaSjto4CYggoRjtbm8roAwqciiMLJ2L9nXUbRIzpTja3kGjv6mPqbZ-a7emjpRtCD_nLnl0KJA";
 
   constructor(
     private http: HttpClient,
+    private httpService : ApiService
   ) { }
+
+
+  insertAlbumToPlaylist(albumId : number)
+  {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.neededToken
+    });
+
+    this.httpService.get('/album/' + albumId, {headers : headers}).subscribe((value : any) => {
+      this.httpService.post('/playlistalbum', {Name : value.name, Type : value.type, ImgUri : value.imgUri}, {headers : headers}).subscribe((value : any) => {
+        console.log(value);
+      });
+    })
+  }
 
 
   getUserDetails(): Observable<User> {

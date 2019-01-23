@@ -16,7 +16,7 @@
         <div class="text-center" style="margin-top:100px;">
             <!-- items being paged -->
             <div class="column" *ngFor="let item of pagedItems">
-                <fa name="plus"></fa>
+                <fa (click)="insertAlbumToPlaylist(item)" name="plus"></fa>
                 <img src="{{item.imgUri}}" alt="" width="150" height="150" (click)="getAlbumContent(item)">
             </div>
 

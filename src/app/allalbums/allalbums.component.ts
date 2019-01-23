@@ -4,6 +4,8 @@ import { Album } from '../models/album';
 import * as _ from 'underscore';
 import { PagerService } from '../servicies/pager.service';
 import { Router } from '@angular/router';
+import { HttpHeaders } from '@angular/common/http';
+import { SpotifyServiceService } from '../servicies/spotify-service.service';
 
 @Component({
   selector: 'app-allalbums',
@@ -15,10 +17,12 @@ export class AllalbumsComponent implements OnInit {
   allAlbums : Album[];
   pager : any = {};
   pagedItems : any[];
+  neededToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDgyMzc1NDgsImV4cCI6MTU0ODMyMzk0OCwiaWF0IjoxNTQ4MjM3NTQ4fQ._kSOAN36ibMIaaSjto4CYggoRjtbm8roAwqciiMLJ2L9nXUbRIzpTja3kGjv6mPqbZ-a7emjpRtCD_nLnl0KJA";
 
   constructor(private apiService : ApiService,
     private pagerService: PagerService,
-    private route : Router) { }
+    private route : Router,
+    private srv : SpotifyServiceService) { }
 
   ngOnInit() {
     this.GetAllAlbums();
@@ -26,7 +30,10 @@ export class AllalbumsComponent implements OnInit {
 
   GetAllAlbums()
   {
-    this.apiService.get('/album').subscribe((value : any) => {
+    const headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + this.neededToken
+    });
+    this.apiService.get('/album', {headers: headers}).subscribe((value : any) => {
       this.allAlbums = value;
       this.setPage(1);
     })
@@ -44,7 +51,12 @@ export class AllalbumsComponent implements OnInit {
 
   getAlbumContent(album : Album)
   {
-    this.route.navigate(['albumdescription/' + album.id])
+    this.route.navigate(['albumdescription/' + album.albumId])
+  }
+
+  insertAlbumToPlaylist(album : Album)
+  {
+    this.srv.insertAlbumToPlaylist(album.albumId);
   }
 
 }

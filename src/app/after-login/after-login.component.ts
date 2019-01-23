@@ -7,6 +7,7 @@ import { SpotifyServiceService } from '../servicies/spotify-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../servicies/api.service';
 import * as $ from 'jquery';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-after-login',
@@ -19,13 +20,29 @@ export class AfterLoginComponent implements OnInit {
   topAlbums : Album[];
   topTracks : Track[];
 
+  albumOption : boolean = false;
+  artistOption : boolean = false;
+  trackOption : boolean = false;
+
+  savedAlbums : Album[];
+  savedTracks : Track[];
+  savedArtists : Artist[];
+
+  playlistAlbums : Album[] = [];
+  playlistTracks : Track[] = [];
+  playlistArtists : Artist[] = [];
+
+  neededToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDgyMzc1NDgsImV4cCI6MTU0ODMyMzk0OCwiaWF0IjoxNTQ4MjM3NTQ4fQ._kSOAN36ibMIaaSjto4CYggoRjtbm8roAwqciiMLJ2L9nXUbRIzpTja3kGjv6mPqbZ-a7emjpRtCD_nLnl0KJA";
+  
   constructor(
     private loginService: LoginService,
     private spotifyService: SpotifyServiceService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private apiService : ApiService
-    ) { }
+    ) {
+      
+    }
 
     ngOnInit() {
       //this.getRecGenres();
@@ -68,21 +85,32 @@ export class AfterLoginComponent implements OnInit {
     }
   
     getTopArtists(){
-      this.apiService.get('/artist').subscribe((value : any) => {
+
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.neededToken
+      });
+
+      this.apiService.get('/artist', {headers: headers}).subscribe((value : any) => {
         this.topArtists = value;
         console.log(this.topArtists);
-      })
+      });
     }
   
     getTopAlbums(){
-      this.apiService.get('/album').subscribe((value : any) => {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.neededToken
+      });
+      this.apiService.get('/album', {headers: headers}).subscribe((value : any) => {
         this.topAlbums = value;
         console.log(this.topAlbums);
       })
     }
   
     getTopTracks(){
-      this.apiService.get('/track').subscribe((value : any) => {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.neededToken
+      });
+      this.apiService.get('/track', {headers: headers}).subscribe((value : any) => {
         this.topTracks = value;
         console.log(this.topTracks);
       })
@@ -90,7 +118,7 @@ export class AfterLoginComponent implements OnInit {
   
     generateAlbumContent(album : Album)
     {
-      this.router.navigate(['albumdescription/' + album.id]);
+      this.router.navigate(['albumdescription/' + album.albumId]);
     }
   
     generateArtistContent(artist : Artist)
@@ -100,7 +128,7 @@ export class AfterLoginComponent implements OnInit {
   
     generateTrackContent(track : Track)
     {
-      this.router.navigate(['trackdescription/' + track.id]);
+      this.router.navigate(['trackdescription/' + track.trackId]);
     }
 
     goToAlbums()
@@ -116,6 +144,46 @@ export class AfterLoginComponent implements OnInit {
     goToArtists()
     {
       this.router.navigate(['allartists']);
+    }
+
+    setAlbumOption() {
+      this.albumOption = true;
+      this.trackOption = false;
+      this.artistOption = false;
+    }
+
+    setTrackOption() {
+      this.trackOption = true;
+      this.albumOption = false;
+      this.artistOption = false;
+    }
+
+    setArtistOption()
+    {
+      this.artistOption = true;
+      this.albumOption = false;
+      this.trackOption = false;
+    }
+
+    displayPlaylistAlbums()
+    {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.neededToken
+      });
+
+      this.apiService.get('/playlistalbum', {headers : headers}).subscribe((value : any) => {
+        
+        if(this.playlistAlbums.length == 0)
+        {
+          for(var i = 0; i < value.length; i++)
+          {
+            if(value[i].imgUri != null)
+            {
+              this.playlistAlbums.unshift(value[i]);
+            }
+          }
+        }
+      })
     }
 
 }

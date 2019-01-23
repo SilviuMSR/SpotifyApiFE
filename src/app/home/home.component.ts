@@ -44,9 +44,9 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     //this.getRecGenres();
-    this.getTopArtists();
-    this.getTopAlbums();
-    this.getTopTracks();
+    //this.getTopArtists();
+    //this.getTopAlbums();
+    //this.getTopTracks();
   }
 
   getTopArtists(){
@@ -72,7 +72,7 @@ export class HomeComponent implements OnInit {
 
   generateAlbumContent(album : Album)
   {
-    this.router.navigate(['albumdescription/' + album.id]);
+    this.router.navigate(['albumdescription/' + album.albumId]);
   }
 
   generateArtistContent(artist : Artist)
@@ -82,7 +82,7 @@ export class HomeComponent implements OnInit {
 
   generateTrackContent(track : Track)
   {
-    this.router.navigate(['trackdescription/' + track.id]);
+    this.router.navigate(['trackdescription/' + track.trackId]);
   }
 
   getAlbumByName()

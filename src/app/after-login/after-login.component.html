@@ -13,10 +13,21 @@
     <div class="playlist">
       <div class="insideplaylist">
         <ul>
-            <li><a href="#">My Albums</a></li>
-            <li><a href="#">My Tracks</a></li>
-            <li><a href="#">My Artists</a></li>
+            <li (click)="setAlbumOption(); displayPlaylistAlbums();">My Albums</li>
+            <li (click)="setTrackOption()">My Tracks</li>
+            <li (click)="setArtistOption()">My Artists</li>
         </ul>
+        <div class="content" *ngIf="albumOption == true">
+          <div class="a" *ngFor="let album of playlistAlbums">
+            {{album.name}}
+          </div>
+        </div>
+        <div class="content" *ngIf="trackOption == true">
+          Tracks here
+        </div>
+        <div class="content" *ngIf="artistOption == true">
+          Artists here
+        </div>
         <footer>
         </footer>
       </div>
@@ -37,26 +48,26 @@
       <div id="slideshow1" (click)="goToTracks()">
           <div><h3>If you want to see all tracks, click me!</h3></div>
           <div>
-            <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg" alt="" height="140" width="140">
+            <img src="{{this.topTracks[0].href}}" alt="" height="140" width="140">
           </div>
           <div>
-            <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg" alt="" height="140" width="140">
+            <img src="{{this.topTracks[1].href}}" alt="" height="140" width="140">
           </div>
           <div>
-            <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg" alt="" height="140" width="140">
+            <img src="{{this.topTracks[2].href}}" alt="" height="140" width="140">
           </div>
         </div>
 
         <div id="slideshow2" (click)="goToArtists()">
             <div><h3>If you want to see all tracks, click me!</h3></div>
             <div>
-              <img src="{{this.topArtists[0].imgUri}}" alt="" height="140" width="140">
+              <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg}" alt="" height="140" width="140">
             </div>
             <div>
-              <img src="{{this.topArtists[0].imgUri}}" alt="" height="140" width="140">
+              <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg" alt="" height="140" width="140">
             </div>
             <div>
-              <img src="{{this.topArtists[0].imgUri}}" alt="" height="140" width="140">
+              <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg" alt="" height="140" width="140">
             </div>
           </div>
       <div class="album">

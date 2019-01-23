@@ -68,12 +68,14 @@
     float: left;
     list-style-type: none;
     border-bottom: 2px solid black;
-    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 24px;
   }
 
   .insideplaylist ul li {
     display:inline-block;
-    padding: 1px;
+    color:white;
+    cursor: pointer;
+    margin-left: 65px;
   }
 
   .insideplaylist {

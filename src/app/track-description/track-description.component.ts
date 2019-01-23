@@ -3,6 +3,7 @@ import { AlbumDescriptionComponent } from '../album-description/album-descriptio
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../servicies/api.service';
 import { Track } from '../models/trackModel';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-track-description',
@@ -19,6 +20,7 @@ export class TrackDescriptionComponent implements OnInit {
 
     id : number;
     track : Track;
+    neededToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDgyMzc1NDgsImV4cCI6MTU0ODMyMzk0OCwiaWF0IjoxNTQ4MjM3NTQ4fQ._kSOAN36ibMIaaSjto4CYggoRjtbm8roAwqciiMLJ2L9nXUbRIzpTja3kGjv6mPqbZ-a7emjpRtCD_nLnl0KJA";
 
     ngOnInit() {
       this.activatedRoute.params.subscribe( params => {
@@ -31,7 +33,10 @@ export class TrackDescriptionComponent implements OnInit {
 
     getContent(id : number)
     {
-      this.apiService.get('/track/' + id).subscribe((value : any) => {
+      const headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + this.neededToken
+      });
+      this.apiService.get('/track/' + id, {headers : headers}).subscribe((value : any) => {
         this.track = value;
       })
     }

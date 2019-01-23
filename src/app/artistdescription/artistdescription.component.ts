@@ -34,14 +34,14 @@ export class ArtistdescriptionComponent implements OnInit {
 
   getContent(id : string)
   {
-    this.apiService.get('/artist/' + id).subscribe((value : any) => {
+    /*this.apiService.get('/artist/' + id).subscribe((value : any) => {
       this.artist = value;
       this.apiService.get('/track/byArtist/' + id).subscribe((t : any) => {
         this.tracks = t;
         this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.artist.imgUri})`)
         console.log(this.tracks)
       })
-    })
+    })*/
   }  
 
 }
