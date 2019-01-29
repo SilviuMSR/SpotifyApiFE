@@ -18,12 +18,15 @@
             <th>Track name</th>
             <th>Love it?</th>
         </tr> 
-        <tr *ngFor="let track of tracks">
+        <tr *ngFor="let track of (tracks | slice:this.tracks.length - 5); let i = index">
             <th>1</th>
-            <th>Play</th>
+            <th>
+                <fa name="play" *ngIf="!isPlayed" (click)="playTrack(track)" style="color:red; font-size:25px;"></fa>
+                <fa name="stop" *ngIf="isPlayed" (click)="stopTrack()" style="color:red; font-size:25px;"></fa>
+                <!--<div class="audio_btn"></div>-->
+            </th>
             <th>{{track.name}}</th>
-            <th><i class="fa fa-car" style="font-size:60px;color:red;"></i></th>
+            <th><fa name="heart" (click)="addToPlaylist(track)" style="color:red; font-size:25px;"></fa></th>
         </tr>
     </table>
-    
 </header>

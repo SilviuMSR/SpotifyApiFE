@@ -209,3 +209,38 @@
     right: 10px;
     bottom: 10px;
   }
+
+  #arrow {
+    color:white;
+    font-size: 25px;
+  }
+
+  .a img {
+    margin-left: 10px;
+    border-radius: 8px;
+    box-shadow: 3px 3px;
+    transition: transform 0.6s;
+}
+
+  .a img:hover {
+    transform: scale(1.1);
+}
+
+ .a b {
+   margin-left:10px;
+ }
+
+ .t img {
+  margin-left: 10px;
+  border-radius: 8px;
+  box-shadow: 3px 3px;
+  transition: transform 0.6s;
+}
+
+.t img:hover {
+  transform: scale(1.1);
+}
+
+.t b {
+ margin-left:10px;
+}

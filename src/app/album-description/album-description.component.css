@@ -70,6 +70,7 @@ ul li a:hover {
 #trackpart td, #trackpart th {
   border: 1px solid transparent;
   padding: 8px;
+  text-align:center;
 }
 
 #trackpart tr:hover {background-color: #ddd;}
@@ -77,6 +78,17 @@ ul li a:hover {
 #trackpart th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: left;
+  text-align: center;
   color: white;
+}
+
+
+.audio_btn {
+  width: 32px;
+  height: 32px;
+  background: url('../../assets/images/play.png');
+  background-size: cover;
+}
+.audio_box.active_state .audio_btn{
+  background-image: url('../../assets/images/pause.png');
 }

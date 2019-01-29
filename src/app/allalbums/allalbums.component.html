@@ -13,30 +13,13 @@
     <div>
     <h2>Current available albums</h2>
     <div class="row">
-        <div class="text-center" style="margin-top:100px;">
-            <!-- items being paged -->
-            <div class="column" *ngFor="let item of pagedItems">
-                <fa (click)="insertAlbumToPlaylist(item)" name="plus"></fa>
-                <img src="{{item.imgUri}}" alt="" width="150" height="150" (click)="getAlbumContent(item)">
-            </div>
-
-            <!-- pager -->
-            <ul *ngIf="pager.pages && pager.pages.length" class="pagination" style="position: absolute; left:10%; top:100%;">
-                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                    <a (click)="setPage(1)">First</a>
-                </li>
-                <li [ngClass]="{disabled:pager.currentPage === 1}">
-                    <a (click)="setPage(pager.currentPage - 1)">Previous</a>
-                </li>
-                <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-                    <a (click)="setPage(page)">{{page}}</a>
-                </li>
-                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                    <a (click)="setPage(pager.currentPage + 1)">Next</a>
-                </li>
-                <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
-                    <a (click)="setPage(pager.totalPages)">Last</a>
-                </li>
+        <div *ngFor="let album of this.allAlbums">
+            <img src={{album.imgUri}} alt="" width="250" height="250">
+            <button (click)="insertAlbumToPlaylist(album)">Add</button>
+        </div>
+        <div *ngFor="let index of this.pages">
+             <ul >
+                 <li style="cursor: pointer; margin-top:250px; margin-left:80px;" (click)="GetAlbums(index)">{{index}}</li>
             </ul>
         </div>
     </div>

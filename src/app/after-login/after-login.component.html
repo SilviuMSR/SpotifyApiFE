@@ -14,21 +14,33 @@
       <div class="insideplaylist">
         <ul>
             <li (click)="setAlbumOption(); displayPlaylistAlbums();">My Albums</li>
-            <li (click)="setTrackOption()">My Tracks</li>
+            <li (click)="setTrackOption(); displayPlaylistTracks();">My Tracks</li>
             <li (click)="setArtistOption()">My Artists</li>
         </ul>
+        <div class="content" *ngIf="!albumOption && !trackOption && !artistOption">
+          This is your playlist
+          .Access it by choosing what you want to display
+        </div>
         <div class="content" *ngIf="albumOption == true">
           <div class="a" *ngFor="let album of playlistAlbums">
-            {{album.name}}
+            <img src="{{album.imgUri}}" alt="" height="35" width="35">
+            <fa name="plus" (click)="deleteAlbumFromPlaylist(album)" style="margin-left:10px;"></fa>
+            <b>{{album.name}}</b>
           </div>
         </div>
         <div class="content" *ngIf="trackOption == true">
-          Tracks here
+          <div class="t" *ngFor="let track of playlistTracks">
+            <img src="{{track.href}}" alt="" height="35" width="35">
+            <fa name="plus" (click)="deleteTrackFromPlaylist(track)" style="margin-left:10px;"></fa>
+            <b>{{track.name}}</b>
+          </div>
         </div>
         <div class="content" *ngIf="artistOption == true">
           Artists here
         </div>
         <footer>
+            <button (click)="displayNextAlbums()" style="background: transparent; background-size: cover;">ButtonNext</button>
+            <button (click)="displayPreviousAlbums()">ButtonNext</button>
         </footer>
       </div>
     </div>
@@ -72,11 +84,11 @@
           </div>
       <div class="album">
         <h3>Top Albums</h3>
-        <app-albums *ngFor="let album of (topAlbums | slice:this.topAlbums.length - 5);" [album]="album" (click)="generateAlbumContent(album)"></app-albums>
+        <app-albums *ngFor="let album of topAlbums | slice:0:5" [album]="album" (click)="generateAlbumContent(album)"></app-albums>
       </div>
       <div class="track">
         <h3>Top tracks</h3>
-        <app-tracks *ngFor="let track of (topTracks | slice:this.topTracks.length - 5);" [track]="track" (click)="generateTrackContent(track)"></app-tracks>
+        <app-tracks *ngFor="let track of topTracks | slice:0:5" [track]="track" (click)="generateTrackContent(track)"></app-tracks>
       </div>
       <div class="artist">
         <h3>Top artists</h3>

@@ -4,7 +4,7 @@ import { Album } from '../models/album';
 import * as _ from 'underscore';
 import { PagerService } from '../servicies/pager.service';
 import { Router } from '@angular/router';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { SpotifyServiceService } from '../servicies/spotify-service.service';
 
 @Component({
@@ -15,14 +15,13 @@ import { SpotifyServiceService } from '../servicies/spotify-service.service';
 export class AllalbumsComponent implements OnInit {
 
   allAlbums : Album[];
-  pager : any = {};
-  pagedItems : any[];
-  neededToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDgyMzc1NDgsImV4cCI6MTU0ODMyMzk0OCwiaWF0IjoxNTQ4MjM3NTQ4fQ._kSOAN36ibMIaaSjto4CYggoRjtbm8roAwqciiMLJ2L9nXUbRIzpTja3kGjv6mPqbZ-a7emjpRtCD_nLnl0KJA";
+  AlbumLinks : any;
+  pages : number[] = [];
 
   constructor(private apiService : ApiService,
-    private pagerService: PagerService,
     private route : Router,
-    private srv : SpotifyServiceService) { }
+    private srv : SpotifyServiceService,
+    private http: HttpClient) { }
 
   ngOnInit() {
     this.GetAllAlbums();
@@ -30,23 +29,25 @@ export class AllalbumsComponent implements OnInit {
 
   GetAllAlbums()
   {
-    const headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.neededToken
-    });
-    this.apiService.get('/album', {headers: headers}).subscribe((value : any) => {
-      this.allAlbums = value;
-      this.setPage(1);
+    this.apiService.get('/album').subscribe((value : any) => {
+      this.allAlbums = value.values;
+      this.AlbumLinks = value.links;
+      for(var i = 1; i <= this.AlbumLinks.totalPages; i++)
+      {
+        this.pages[i] = i;
+      }
     })
   }
 
-  setPage(page : number){
-    if(page < 1 || page > this.pager.totalPages)
-    {
-      return;
-    }
-    this.pager = this.pagerService.getPager(this.allAlbums.length, page);
-
-    this.pagedItems = this.allAlbums.slice(this.pager.startIndex, this.pager.endIndex + 1);
+  GetAlbums(pageNumber : number) {   
+    let headers = new HttpHeaders({
+      'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDg3NDYzMDcsImV4cCI6MTU0ODgzMjcwNywiaWF0IjoxNTQ4NzQ2MzA3fQ.XKMKN1zZdKKY4g1uLapVZCKV-tx4J3lEC-YQcYMWo2eMe5t50Q590TdVhL6MLi5bhQFnBLEtPWLHT_N3zz7N_g'
+    });
+    this.http.get('https://localhost:5001/api/album?pageNumber=' + pageNumber + '&pageSize=9', {headers: headers}).subscribe((value : any) => {
+      this.allAlbums = value.values;
+      console.log(this.allAlbums);
+      this.AlbumLinks = value.links;
+    })
   }
 
   getAlbumContent(album : Album)

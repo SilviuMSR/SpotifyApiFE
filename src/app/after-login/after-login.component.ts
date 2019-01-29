@@ -7,7 +7,8 @@ import { SpotifyServiceService } from '../servicies/spotify-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../servicies/api.service';
 import * as $ from 'jquery';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpHeaderResponse, HttpResponse } from '@angular/common/http';
+import { HttpClientModule, HttpClient} from '@angular/common/http'
 
 @Component({
   selector: 'app-after-login',
@@ -20,9 +21,9 @@ export class AfterLoginComponent implements OnInit {
   topAlbums : Album[];
   topTracks : Track[];
 
-  albumOption : boolean = false;
-  artistOption : boolean = false;
-  trackOption : boolean = false;
+  albumOption : boolean;
+  artistOption : boolean;
+  trackOption : boolean;
 
   savedAlbums : Album[];
   savedTracks : Track[];
@@ -32,14 +33,18 @@ export class AfterLoginComponent implements OnInit {
   playlistTracks : Track[] = [];
   playlistArtists : Artist[] = [];
 
-  neededToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDgyMzc1NDgsImV4cCI6MTU0ODMyMzk0OCwiaWF0IjoxNTQ4MjM3NTQ4fQ._kSOAN36ibMIaaSjto4CYggoRjtbm8roAwqciiMLJ2L9nXUbRIzpTja3kGjv6mPqbZ-a7emjpRtCD_nLnl0KJA";
-  
+  defaultStartPage = 1;
+  defaultPageSize = 5;
+
+  playlistAlbumLinks : any;
+
   constructor(
     private loginService: LoginService,
     private spotifyService: SpotifyServiceService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private apiService : ApiService
+    private apiService : ApiService,
+    private http: HttpClient
     ) {
       
     }
@@ -49,6 +54,7 @@ export class AfterLoginComponent implements OnInit {
      this.getTopArtists();
      this.getTopAlbums();
      this.getTopTracks();
+     
 
       $("#slideshow > div:gt(0)").hide();
 
@@ -86,39 +92,29 @@ export class AfterLoginComponent implements OnInit {
   
     getTopArtists(){
 
-      const headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + this.neededToken
-      });
-
-      this.apiService.get('/artist', {headers: headers}).subscribe((value : any) => {
+      this.apiService.get('/artist').subscribe((value : any) => {
         this.topArtists = value;
         console.log(this.topArtists);
       });
     }
   
     getTopAlbums(){
-      const headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + this.neededToken
-      });
-      this.apiService.get('/album', {headers: headers}).subscribe((value : any) => {
-        this.topAlbums = value;
+      this.apiService.get('/album').subscribe((value : any) => {
+        this.topAlbums = value.values;
         console.log(this.topAlbums);
       })
     }
   
     getTopTracks(){
-      const headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + this.neededToken
-      });
-      this.apiService.get('/track', {headers: headers}).subscribe((value : any) => {
+      this.apiService.get('/track').subscribe((value : any) => {
         this.topTracks = value;
         console.log(this.topTracks);
       })
     }
-  
     generateAlbumContent(album : Album)
     {
-      this.router.navigate(['albumdescription/' + album.albumId]);
+      if(album)
+        this.router.navigate(['albumdescription/' + album.albumId]);
     }
   
     generateArtistContent(artist : Artist)
@@ -167,23 +163,63 @@ export class AfterLoginComponent implements OnInit {
 
     displayPlaylistAlbums()
     {
-      const headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + this.neededToken
-      });
+      var queryParams = '?pageNumber=' + this.defaultStartPage + '&pageSize=' + this.defaultPageSize;
+      
+      this.apiService.get('/playlistalbum' + queryParams).subscribe((value : any)  => {
+       this.playlistAlbums = value.values;
+       this.playlistAlbumLinks = value.links;
+      })
 
-      this.apiService.get('/playlistalbum', {headers : headers}).subscribe((value : any) => {
-        
-        if(this.playlistAlbums.length == 0)
+    }
+
+    displayNextAlbums() {   
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDg3NDYzMDcsImV4cCI6MTU0ODgzMjcwNywiaWF0IjoxNTQ4NzQ2MzA3fQ.XKMKN1zZdKKY4g1uLapVZCKV-tx4J3lEC-YQcYMWo2eMe5t50Q590TdVhL6MLi5bhQFnBLEtPWLHT_N3zz7N_g'
+      });
+      this.http.get(this.playlistAlbumLinks.nextPageLink, {headers : headers}).subscribe((value : any)  => {
+       this.playlistAlbums = value.values;
+       this.playlistAlbumLinks = value.links;
+      })
+    }
+
+    displayPreviousAlbums() {
+      let headers = new HttpHeaders({
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDg3NDYzMDcsImV4cCI6MTU0ODgzMjcwNywiaWF0IjoxNTQ4NzQ2MzA3fQ.XKMKN1zZdKKY4g1uLapVZCKV-tx4J3lEC-YQcYMWo2eMe5t50Q590TdVhL6MLi5bhQFnBLEtPWLHT_N3zz7N_g'
+      });
+      this.http.get(this.playlistAlbumLinks.previousPageLink, {headers : headers}).subscribe((value : any)  => {
+       this.playlistAlbums = value.values;
+       this.playlistAlbumLinks = value.links;
+      })
+    }
+
+
+    displayPlaylistTracks(){
+      this.apiService.get('/playlistTrack').subscribe((value : any) => {
+        if(this.playlistTracks.length == 0)
         {
           for(var i = 0; i < value.length; i++)
           {
-            if(value[i].imgUri != null)
+            if(value[i].href != null)
             {
-              this.playlistAlbums.unshift(value[i]);
+              this.playlistTracks.unshift(value[i]);
             }
           }
         }
       })
     }
+
+    deleteAlbumFromPlaylist(album : Album){
+      this.apiService.delete('/playlistAlbum/' + album.playlistAlbumId).subscribe((value : any) =>{
+        location.reload();
+      });
+    }
+
+    deleteTrackFromPlaylist(track : Track)
+    {
+      this.apiService.delete('/playlistTrack/' + track.playlistTrackId).subscribe((value : any) => {
+        location.reload();
+      })
+    }
+
 
 }
