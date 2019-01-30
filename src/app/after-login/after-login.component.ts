@@ -174,7 +174,7 @@ export class AfterLoginComponent implements OnInit {
 
     displayNextAlbums() {   
       let headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDg3NDYzMDcsImV4cCI6MTU0ODgzMjcwNywiaWF0IjoxNTQ4NzQ2MzA3fQ.XKMKN1zZdKKY4g1uLapVZCKV-tx4J3lEC-YQcYMWo2eMe5t50Q590TdVhL6MLi5bhQFnBLEtPWLHT_N3zz7N_g'
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwidW5pcXVlX25hbWUiOiJTaWx2aXUxMiIsIm5iZiI6MTU0ODgzNjIyNiwiZXhwIjoxNTQ4OTIyNjI2LCJpYXQiOjE1NDg4MzYyMjZ9._FKpBU6YwuQ_N0e3uQ500GLimD6MY4pXu2T17FA-Mn0VtW3gqVA0zFQl2WYY_iynh1KCVRWzeu8b43M9z87hHw'
       });
       this.http.get(this.playlistAlbumLinks.nextPageLink, {headers : headers}).subscribe((value : any)  => {
        this.playlistAlbums = value.values;
@@ -184,7 +184,7 @@ export class AfterLoginComponent implements OnInit {
 
     displayPreviousAlbums() {
       let headers = new HttpHeaders({
-        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxIiwidW5pcXVlX25hbWUiOiJTaWx2aXUiLCJuYmYiOjE1NDg3NDYzMDcsImV4cCI6MTU0ODgzMjcwNywiaWF0IjoxNTQ4NzQ2MzA3fQ.XKMKN1zZdKKY4g1uLapVZCKV-tx4J3lEC-YQcYMWo2eMe5t50Q590TdVhL6MLi5bhQFnBLEtPWLHT_N3zz7N_g'
+        'Authorization': 'Bearer ' + 'eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIyIiwidW5pcXVlX25hbWUiOiJTaWx2aXUxMiIsIm5iZiI6MTU0ODgzNjIyNiwiZXhwIjoxNTQ4OTIyNjI2LCJpYXQiOjE1NDg4MzYyMjZ9._FKpBU6YwuQ_N0e3uQ500GLimD6MY4pXu2T17FA-Mn0VtW3gqVA0zFQl2WYY_iynh1KCVRWzeu8b43M9z87hHw'
       });
       this.http.get(this.playlistAlbumLinks.previousPageLink, {headers : headers}).subscribe((value : any)  => {
        this.playlistAlbums = value.values;
