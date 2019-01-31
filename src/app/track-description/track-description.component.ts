@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../servicies/api.service';
 import { Track } from '../models/trackModel';
 import { HttpHeaders } from '@angular/common/http';
+import { TrackServiceService } from '../servicies/track-service.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-track-description',
@@ -16,25 +18,51 @@ export class TrackDescriptionComponent implements OnInit {
   trackId : number;
 
   constructor(private activatedRoute: ActivatedRoute,
+    private trackService : TrackServiceService,
+    private sanitization:DomSanitizer,
     private apiService : ApiService) { }
 
     id : number;
     track : Track;
+    backgroundStyle : any;
+    audio : any;
+    isPlayed : boolean = true;
 
     ngOnInit() {
       this.activatedRoute.params.subscribe( params => {
         this.id = params['id']
       });
-  
       this.getContent(this.id);
-    
+      this.audio = new Audio();
     }
 
     getContent(id : number)
     {
-      this.apiService.get('/track/' + id).subscribe((value : any) => {
+      /*this.apiService.get('/track/' + id).subscribe((value : any) => {
         this.track = value;
+      })*/
+      this.trackService.getTrackContent(id).subscribe((value : any) => {
+        this.track = value;
+        this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.track.href})`);
+        this.playTrack(this.track);
+        
       })
+
     }
+
+    playTrack(track: Track)
+    {
+      this.audio.src = track.previewUrl;
+      this.audio.load();
+      this.audio.play();
+      this.isPlayed = true;
+    }
+  
+    stopTrack() {
+      this.audio.pause();
+      this.audio.currentTime = 0;
+      this.isPlayed = false;
+    }
+
 
 }

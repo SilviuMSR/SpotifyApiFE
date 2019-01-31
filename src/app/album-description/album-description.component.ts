@@ -6,6 +6,11 @@ import { Track } from '../models/trackModel';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpHeaders } from '@angular/common/http';
 import { hostViewClassName } from '@angular/compiler';
+import { SpotifyServiceService } from '../servicies/spotify-service.service';
+import { AlbumServiceService } from '../servicies/album-service.service';
+import { PlaylistAlbumService } from '../servicies/playlist-album.service';
+import { PlaylistTrackService } from '../servicies/playlist-track.service';
+import { TrackServiceService } from '../servicies/track-service.service';
 
 @Component({
   selector: 'app-album-description',
@@ -20,11 +25,16 @@ export class AlbumDescriptionComponent implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute,
               private apiService : ApiService,
-              private sanitization:DomSanitizer) { }
+              private sanitization:DomSanitizer,
+              private srv: SpotifyServiceService,
+              private albumService: AlbumServiceService,
+              private trackService: TrackServiceService,
+              private playlistTrackService : PlaylistTrackService,
+              private playlistAlbumService: PlaylistAlbumService) { }
 
-  id : string;
+  id : number;
   album : Album;
-  tracks : Track[];
+  tracks : Track[] = [];
   backgroundStyle: any;
   audio : any;
   isPlayed : boolean = false;
@@ -34,22 +44,41 @@ export class AlbumDescriptionComponent implements OnInit {
     this.activatedRoute.params.subscribe( params => {
       this.id = params['id']
     });
-
-    this.getContent(this.id);
+    this.getContent();
     this.audio = new Audio();
-  
+    console.log(this.id);
   }
 
-  getContent(id : string)
+  getContent()
   {
-    this.apiService.get('/album/' + id).subscribe((value : any) => {
+    /*this.apiService.get('/album/' + this.id).subscribe((value : any) => {
       this.album = value;
       this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.album.imgUri})`);
       this.apiService.get('/track').subscribe((t : any) => {
-        this.tracks = t;
-        console.log(this.tracks);
+       this.tracks = t;
+     })
+    })*/
+    if(this.id > 1000)
+    {
+      this.playlistAlbumService.getAlbumContent(this.id).subscribe((val : any) => {
+        this.album = val;
+        console.log(this.album);
+        this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.album.imgUri})`);
+         this.trackService.getTopTracks().subscribe((value : any) => {
+         this.tracks = value.values;
+       })
       })
-    })
+    }
+    else
+    {
+      this.albumService.getAlbumContent(this.id).subscribe((val : any) => {
+        this.album = val;
+        this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.album.imgUri})`);
+        this.trackService.getTopTracks().subscribe((value : any) => {
+          this.tracks = value.values;
+      })
+      })
+    }
   }
 
   playTrack(track: Track)
@@ -67,9 +96,13 @@ export class AlbumDescriptionComponent implements OnInit {
   }
 
   addToPlaylist(track: Track) {
-    this.apiService.post('/playlistTrack', {Name: track.name, PreviewUrl: track.previewUrl, Href:track.href}).subscribe();
+    //this.apiService.post('/playlistTrack', {Name: track.name, PreviewUrl: track.previewUrl, Href:track.href}).subscribe();
+    this.playlistTrackService.insertTrackToPlaylist(track).subscribe();
   }
 
-  
-
+  insertAlbumToPlaylist(album : Album)
+  {
+    //this.srv.insertAlbumToPlaylist(album.albumId);
+    this.playlistAlbumService.insertAlbumToPlaylist(album.albumId);
+  }
 }

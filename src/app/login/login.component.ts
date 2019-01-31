@@ -22,4 +22,5 @@ export class LoginComponent implements OnInit {
     this.spotifyService.authorizeLogin();
   }
 
+
 }

@@ -4,26 +4,29 @@
           <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
         </div>
         <ul>
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Albums</a></li>
-          <li><a href="#">Tracks</a></li>
-          <li><a href="#">Artists</a></li>
+            <li class="active"><a href="#">Home</a></li>
+            <li><a (click)="goToAlbums();">Albums</a></li>
+            <li><a (click)="goToTracks();">Tracks</a></li>
+            <li><a (click)="goToArtists();">Artists</a></li>
         </ul>
       </div>
     <div>
     <h2>Current available albums</h2>
-    <div class="row">
-        <div *ngFor="let album of this.allAlbums">
-            <img src={{album.imgUri}} alt="" width="250" height="250">
-            <button (click)="insertAlbumToPlaylist(album)">Add</button>
-        </div>
-        <div *ngFor="let index of this.pages">
-             <ul >
-                 <li style="cursor: pointer; margin-top:250px; margin-left:80px;" (click)="GetAlbums(index)">{{index}}</li>
-            </ul>
+    <div class="row" style="position:absolute; top:35%;">
+        <div *ngFor="let album of this.allAlbums" style="padding-left:50px;">
+            <!--<button (click)="insertAlbumToPlaylist(album)">Add</button>-->
+            <h2 style="position: relative; font-size:20px; top:-10%; left: 5%;">{{album.name}}</h2>
+            <img src={{album.imgUri}} alt="" width="250" height="250" (click)="getAlbumContent(album)">
+            
         </div>
     </div>
-    <hr />
 </div>
+<div class="numbers" style="cursor:pointer; display:flex; position:absolute; left:40%; top:80%; color:white; font-size:30px;">
+        <div *ngFor="let index of this.pages">
+            <ul >
+                <li (click)="GetAlbums(index)">{{index}}</li>
+            </ul>
+        </div>
+    </div>  
 </header>
 

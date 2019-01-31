@@ -4,6 +4,10 @@ import { ApiService } from '../servicies/api.service';
 import { Artist } from '../models/artistModel';
 import { Track } from '../models/trackModel';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ArtistServiceService } from '../servicies/artist-service.service';
+import { TrackServiceService } from '../servicies/track-service.service';
+import { PlaylistTrackService } from '../servicies/playlist-track.service';
+import { PlaylistartistService } from '../servicies/playlistartist.service';
 
 @Component({
   selector: 'app-artistdescription',
@@ -16,23 +20,29 @@ export class ArtistdescriptionComponent implements OnInit {
   artistId : string;
 
   constructor(private activatedRoute: ActivatedRoute,
+    private artistService : ArtistServiceService,
+    private trackService : TrackServiceService,
     private apiService : ApiService,
+    private playlistTrackService : PlaylistTrackService,
+    private playlistArtistService : PlaylistartistService,
     private sanitization:DomSanitizer) { }
 
   id : string;
   artist : Artist;
   tracks : Track[];
   backgroundStyle: any;
+  audio : any;
+  isPlayed : boolean = false;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe( params => {
       this.id = params['id'];
     });
-
-    this.getContent(this.id);
+    this.audio = new Audio();
+    this.getContent();
   }
 
-  getContent(id : string)
+  getContent()
   {
     /*this.apiService.get('/artist/' + id).subscribe((value : any) => {
       this.artist = value;
@@ -42,6 +52,39 @@ export class ArtistdescriptionComponent implements OnInit {
         console.log(this.tracks)
       })
     })*/
-  }  
+    this.artistService.getArtist(this.id).subscribe((value : any) => {
+      this.artist = value;
+      this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.artist.imgUri})`)
+      this.trackService.getTopTracks().subscribe((val : any) => {
+        this.tracks = val.values;
+      })
+    })
+  }
+  
+  addToPlaylist(track: Track) {
+    //this.apiService.post('/playlistTrack', {Name: track.name, PreviewUrl: track.previewUrl, Href:track.href}).subscribe();
+    this.playlistTrackService.insertTrackToPlaylist(track).subscribe();
+  }
+
+  playTrack(track: Track)
+  {
+    this.audio.src = track.previewUrl;
+    this.audio.load();
+    this.audio.play();
+    this.isPlayed = !this.isPlayed;
+  }
+
+  stopTrack() {
+    this.audio.pause();
+    this.audio.currentTime = 0;
+    this.isPlayed = !this.isPlayed;
+  }
+
+  insertArtistToPlaylist(artist : Artist)
+  {
+    //this.srv.insertAlbumToPlaylist(album.albumId);
+    this.playlistArtistService.insertArtistToPlaylist(artist.artistId);
+  }
+
 
 }

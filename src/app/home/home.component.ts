@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
 
   generateArtistContent(artist : Artist)
   {
-    this.router.navigate(['artistdescription/' + artist.id]);
+    this.router.navigate(['artistdescription/' + artist.artistId]);
   }
 
   generateTrackContent(track : Track)
@@ -133,7 +133,7 @@ export class HomeComponent implements OnInit {
 
 
   navigate(track: Track) {
-    this.router.navigate(['artistplaylist/' + track.artists[0].id]);
+    this.router.navigate(['artistplaylist/' + track.artists[0].artistId]);
   }
 
 

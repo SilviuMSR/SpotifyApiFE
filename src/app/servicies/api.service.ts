@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http'
+import { HttpClientModule, HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http'
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class ApiService {
 
   constructor(private httpClient : HttpClient) {
     this.headers = new HttpHeaders({
-      'Authorization': 'Bearer ' + this.neededToken
+      'Authorization': 'Bearer ' + this.neededToken,
+      'Content-Type': 'application/json'
     });
    }
 
@@ -49,4 +51,5 @@ export class ApiService {
       return this.URL + '/' + link;
     }
   }
+
 }

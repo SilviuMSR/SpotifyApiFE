@@ -5,9 +5,9 @@
       </div>
       <ul>
         <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Albums</a></li>
-        <li><a href="#">Tracks</a></li>
-        <li><a href="#">Artists</a></li>
+        <li><a (click)="goToAlbums();">Albums</a></li>
+        <li><a (click)="goToTracks();">Tracks</a></li>
+        <li><a (click)="goToArtists();">Artists</a></li>
       </ul>
     </div>
     <div class="playlist">
@@ -15,32 +15,49 @@
         <ul>
             <li (click)="setAlbumOption(); displayPlaylistAlbums();">My Albums</li>
             <li (click)="setTrackOption(); displayPlaylistTracks();">My Tracks</li>
-            <li (click)="setArtistOption()">My Artists</li>
+            <li (click)="setArtistOption(); displayPlaylistArtists();">My Artists</li>
         </ul>
         <div class="content" *ngIf="!albumOption && !trackOption && !artistOption">
-          This is your playlist
-          .Access it by choosing what you want to display
+          <h3 style="color:white; text-align: center; margin-top:150px;">Welcome!<br><br>This is your playlist.<br><br>Please choose what you want to see from it.</h3>
         </div>
         <div class="content" *ngIf="albumOption == true">
-          <div class="a" *ngFor="let album of playlistAlbums">
-            <img src="{{album.imgUri}}" alt="" height="35" width="35">
-            <fa name="plus" (click)="deleteAlbumFromPlaylist(album)" style="margin-left:10px;"></fa>
-            <b>{{album.name}}</b>
+          <div class="a" style="margin-top:10px;" *ngFor="let album of playlistAlbums">
+            <img src="{{album.imgUri}}" alt="" height="35" width="35" (click)="generateAlbumContent(album)">
+            <fa name="close" (click)="deleteAlbumFromPlaylist(album)" style="margin-left:10px;"></fa>
+            <b style="color:white;">{{album.name}}</b>
+            <fa name="chevron-circle-right" (click)="generateAlbumContent(album)" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
           </div>
+          <ul>
+           <li (click)="displayPreviousAlbums()" style="position:absolute;">Previous</li>
+           <li (click)="displayNextAlbums()" style="position: absolute; right:10%;">Next</li>
+          </ul>
         </div>
         <div class="content" *ngIf="trackOption == true">
-          <div class="t" *ngFor="let track of playlistTracks">
-            <img src="{{track.href}}" alt="" height="35" width="35">
-            <fa name="plus" (click)="deleteTrackFromPlaylist(track)" style="margin-left:10px;"></fa>
-            <b>{{track.name}}</b>
+          <div class="t" style="margin-top:10px;" *ngFor="let track of playlistTracks">
+            <img src="{{track.href}}" alt="" height="35" width="35" (click)="generateTrackContent(track)">
+            <fa name="close" (click)="deleteTrackFromPlaylist(track)" style="margin-left:10px;"></fa>
+            <b style="color:white;">{{track.name}}</b>
+            <fa name="play" *ngIf="isPlayed==false" (click)="playTrack(track);" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
+            <fa name="pause" *ngIf="isPlayed==true" (click)="stopTrack();" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
           </div>
+          <ul>
+            <li (click)="displayPreviousTracks()" style="position:absolute;">Previous</li>
+            <li (click)="displayNextTracks()" style="position: absolute; right:10%;">Next</li>
+          </ul>
         </div>
         <div class="content" *ngIf="artistOption == true">
-          Artists here
+          <div class="a" style="margin-top:10px;" *ngFor="let artist of playlistArtists">
+            <img src="{{artist.imgUri}}" alt="" height="35" width="35" (click)="generateArtistContent(artist)">
+            <fa name="close" (click)="deleteArtistFromPlaylist(artist)" style="margin-left:10px;"></fa>
+            <b style="color:white;">{{artist.name}}</b>
+            <fa name="chevron-circle-right" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
+          </div>
+          <ul>
+            <li (click)="displayPreviousArtists()" style="position:absolute;">Previous</li>
+            <li (click)="displayNextArtists()" style="position: absolute; right:10%;">Next</li>
+          </ul>
         </div>
         <footer>
-            <button (click)="displayNextAlbums()" style="background: transparent; background-size: cover;">ButtonNext</button>
-            <button (click)="displayPreviousAlbums()">ButtonBack</button>
         </footer>
       </div>
     </div>
@@ -92,6 +109,6 @@
       </div>
       <div class="artist">
         <h3>Top artists</h3>
-        <app-artists *ngFor="let artist of topArtists" [artist]="artist" (click)="generateArtistContent(artist)"></app-artists>
+        <app-artists *ngFor="let artist of topArtists | slice:0:5" [artist]="artist" (click)="generateArtistContent(artist)"></app-artists>
       </div>
   </header>

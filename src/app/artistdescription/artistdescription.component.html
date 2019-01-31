@@ -7,6 +7,7 @@
         <ul>
             <li><a href="/artistdescription/{{artist.id}}">PLAYLIST</a></li>
             <li><a href="/artistdescription/{{artist.id}}">ABOUT</a></li>
+            <li><a (click)="insertArtistToPlaylist(artist)" style="cursor: pointer;">INSERT TO PLAYLIST</a></li>
             <li class="back"><a href="/after">BACK</a></li>
         </ul>
         <div class="title">
@@ -19,11 +20,14 @@
                     <th>Track name</th>
                     <th>Love it?</th>
                 </tr> 
-                <tr *ngFor="let track of tracks">
-                    <th>1</th>
-                    <th>Play</th>
+                <tr *ngFor="let track of tracks | slice:0:5; let i = index">
+                    <th>{{i}}</th>
+                    <th>
+                        <fa name="play" *ngIf="!isPlayed" (click)="playTrack(track)" style="color:red; font-size:25px;"></fa>
+                        <fa name="stop" *ngIf="isPlayed" (click)="stopTrack()" style="color:red; font-size:25px;"></fa>
+                    </th>
                     <th>{{track.name}}</th>
-                    <th><i class="fa fa-heart-o" style="font-size:48px;color:red"></i></th>
+                    <th><fa name="heart" (click)="addToPlaylist(track)" style="color:red; font-size:25px;"></fa></th>
                 </tr>
             </table>
     </header>

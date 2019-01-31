@@ -1,5 +1,6 @@
 export class Artist {
-    id: string;
+    artistId: string;
+    playlistArtistId: number;
     name: string;
     uri: string;
     imgUri: string;

@@ -45,6 +45,16 @@
     width: 150px;
     height: auto;
   }
+
+  .row img {
+    border-radius: 8px;
+    box-shadow: 3px 3px;
+    transition: transform 0.6s;
+  }
+
+  .row img:hover {
+    transform: scale(1.1);
+  }
   
   .main {
     max-width: 2200px;
