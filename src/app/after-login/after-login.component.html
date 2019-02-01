@@ -10,6 +10,29 @@
         <li><a (click)="goToArtists();">Artists</a></li>
       </ul>
     </div>
+
+
+    <div class="create">
+      Can be seen only by admin
+      <h4>Insert album</h4>
+      <div class="insertalbum">
+          <div class="forms">
+              <form>
+                  <label for="aname"><b>Album name</b></label>
+                  <input type="text" [(ngModel)]="albumname" id="albumname" placeholder="Enter albumname" name="albumname" required>
+
+                  <label for="atype"><b>Album type</b></label>
+                  <input type="text" [(ngModel)]="albumtype" id="albumtype" placeholder="Enter albumtype" name="albumtype" required>
+
+                  <label for="auri"><b>Album Image</b></label>
+                  <input type="file" [(ngModel)]="albumuri" id="albumuri" placeholder="Enter albumuri" name="albumuri" accept="image/*" required>
+                  <input type="submit" value="SUBMIT">
+              </form>
+            </div>
+      </div>
+    </div>
+
+
     <div class="playlist">
       <div class="insideplaylist">
         <ul>
@@ -17,11 +40,12 @@
             <li (click)="setTrackOption(); displayPlaylistTracks();">My Tracks</li>
             <li (click)="setArtistOption(); displayPlaylistArtists();">My Artists</li>
         </ul>
+
         <div class="content" *ngIf="!albumOption && !trackOption && !artistOption">
           <h3 style="color:white; text-align: center; margin-top:150px;">Welcome!<br><br>This is your playlist.<br><br>Please choose what you want to see from it.</h3>
         </div>
         <div class="content" *ngIf="albumOption == true">
-          <div class="a" style="margin-top:10px;" *ngFor="let album of playlistAlbums">
+          <div class="a" style="margin-top:20px;" *ngFor="let album of playlistAlbums">
             <img src="{{album.imgUri}}" alt="" height="35" width="35" (click)="generateAlbumContent(album)">
             <fa name="close" (click)="deleteAlbumFromPlaylist(album)" style="margin-left:10px;"></fa>
             <b style="color:white;">{{album.name}}</b>
@@ -32,8 +56,9 @@
            <li (click)="displayNextAlbums()" style="position: absolute; right:10%;">Next</li>
           </ul>
         </div>
+
         <div class="content" *ngIf="trackOption == true">
-          <div class="t" style="margin-top:10px;" *ngFor="let track of playlistTracks">
+          <div class="t" style="margin-top:20px;" *ngFor="let track of playlistTracks">
             <img src="{{track.href}}" alt="" height="35" width="35" (click)="generateTrackContent(track)">
             <fa name="close" (click)="deleteTrackFromPlaylist(track)" style="margin-left:10px;"></fa>
             <b style="color:white;">{{track.name}}</b>
@@ -45,8 +70,9 @@
             <li (click)="displayNextTracks()" style="position: absolute; right:10%;">Next</li>
           </ul>
         </div>
+
         <div class="content" *ngIf="artistOption == true">
-          <div class="a" style="margin-top:10px;" *ngFor="let artist of playlistArtists">
+          <div class="a" style="margin-top:20px;" *ngFor="let artist of playlistArtists">
             <img src="{{artist.imgUri}}" alt="" height="35" width="35" (click)="generateArtistContent(artist)">
             <fa name="close" (click)="deleteArtistFromPlaylist(artist)" style="margin-left:10px;"></fa>
             <b style="color:white;">{{artist.name}}</b>
@@ -57,48 +83,13 @@
             <li (click)="displayNextArtists()" style="position: absolute; right:10%;">Next</li>
           </ul>
         </div>
+
         <footer>
         </footer>
       </div>
+
+
     </div>
-      <div id="slideshow" (click)="goToAlbums()">
-        <div><h3>If you want to see all albums, click me!</h3></div>
-        <div>
-          <img src="{{this.topAlbums[0].imgUri}}" alt="" height="140" width="140">
-        </div>
-        <div>
-          <img src="{{this.topAlbums[1].imgUri}}" alt="" height="140" width="140">
-        </div>
-        <div>
-          <img src="{{this.topAlbums[2].imgUri}}" alt="" height="140" width="140">
-        </div>
-      </div>
-
-      <div id="slideshow1" (click)="goToTracks()">
-          <div><h3>If you want to see all tracks, click me!</h3></div>
-          <div>
-            <img src="{{this.topTracks[0].href}}" alt="" height="140" width="140">
-          </div>
-          <div>
-            <img src="{{this.topTracks[1].href}}" alt="" height="140" width="140">
-          </div>
-          <div>
-            <img src="{{this.topTracks[2].href}}" alt="" height="140" width="140">
-          </div>
-        </div>
-
-        <div id="slideshow2" (click)="goToArtists()">
-            <div><h3>If you want to see all tracks, click me!</h3></div>
-            <div>
-              <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg}" alt="" height="140" width="140">
-            </div>
-            <div>
-              <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg" alt="" height="140" width="140">
-            </div>
-            <div>
-              <img src="https://image.freepik.com/free-vector/circle-made-of-music-instruments_23-2147509304.jpg" alt="" height="140" width="140">
-            </div>
-          </div>
       <div class="album">
         <h3>Top Albums</h3>
         <app-albums *ngFor="let album of topAlbums | slice:0:5" [album]="album" (click)="generateAlbumContent(album)"></app-albums>

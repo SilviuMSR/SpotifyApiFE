@@ -1,7 +1,5 @@
 export class User {
-    birthdate: string;
-    country: string;
-    email: string;
-    display_name: string;
+    username : string;
+    password : string;
     href: string;
 }

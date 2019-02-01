@@ -10,10 +10,11 @@ import { Observable } from 'rxjs';
 })
 export class AlbumServiceService {
 
-  neededToken = "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiIxMDAyIiwidW5pcXVlX25hbWUiOiJTaWx2aXUxMjMiLCJuYmYiOjE1NDg5MjMwMzYsImV4cCI6MTU0OTAwOTQzNiwiaWF0IjoxNTQ4OTIzMDM2fQ.TPgcRDC3Jn4H9j56GE2ceZKTkCUk6YNBiJ0JqQN0SKUnhzCnCtFqNkVLobvTFtd6TlHVgvCLE4wt9UIMEfB7Yw";
+  neededToken = localStorage.getItem('token');
   headers : any;
 
   constructor(private httpClient : HttpClient) {
+    console.log(localStorage.getItem('token'));
     this.headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.neededToken
     });

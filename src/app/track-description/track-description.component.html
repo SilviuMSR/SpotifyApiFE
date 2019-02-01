@@ -9,4 +9,20 @@
             </div>
             <fa name="pause" *ngIf="isPlayed == true" (click)="stopTrack()" style="color:black; font-size:25px; position:relative; left:50%; cursor: pointer;"></fa>
             <fa name="play" *ngIf="isPlayed == false" (click)="playTrack(this.track)" style="color:black; font-size:25px; position:relative; left:50%; cursor: pointer;"></fa>
+            <div class="create">
+                    Can be seen only by admin
+                    <h4>Insert artist</h4>
+                    <div class="insertartist">
+                        <div class="forms">
+                            <form>
+                                <label for="arname"><b>Artist name</b></label>
+                                <input type="text" [(ngModel)]="artistname" id="artistname" placeholder="Enter artistname" name="artistname" required>
+
+                                <label for="aruri"><b>Artist Image</b></label>
+                                <input type="file" [(ngModel)]="artisturi" id="artisturi" placeholder="Enter artisturi" name="artisturi" accept="image/*" required>
+                                <input type="submit" value="SUBMIT">
+                            </form>
+                          </div>
+                    </div>
+                  </div>
     </header>

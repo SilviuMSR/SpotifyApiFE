@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Album } from '../models/album';
 import { Track } from '../models/trackModel';
 import { Artist } from '../models/artistModel';
@@ -15,6 +15,8 @@ import { ArtistServiceService } from '../servicies/artist-service.service';
 import { PlaylistAlbumService } from '../servicies/playlist-album.service';
 import { PlaylistTrackService } from '../servicies/playlist-track.service';
 import { PlaylistartistService } from '../servicies/playlistartist.service';
+import { LoginComponent } from '../login/login.component';
+import { UserService } from '../servicies/user.service';
 
 @Component({
   selector: 'app-after-login',
@@ -22,7 +24,7 @@ import { PlaylistartistService } from '../servicies/playlistartist.service';
   styleUrls: ['./after-login.component.css']
 })
 export class AfterLoginComponent implements OnInit {
-  
+
   topArtists : Artist[] = [];
   topAlbums : Album[] = [];
   topTracks : Track[] = [];
@@ -67,45 +69,13 @@ export class AfterLoginComponent implements OnInit {
     }
 
     ngOnInit() {
-      //this.getRecGenres();
+     
      this.getTopArtists();
      this.getTopAlbums();
      this.getTopTracks();
 
      this.audio = new Audio();
      
-      $("#slideshow > div:gt(0)").hide();
-
-      setInterval(function() {
-        $('#slideshow > div:first')
-          .fadeOut(1000)
-          .next()
-          .fadeIn(1000)
-          .end()
-          .appendTo('#slideshow');
-      }, 3000);
-
-      $("#slideshow1 > div:gt(0)").hide();
-
-      setInterval(function() {
-        $('#slideshow1 > div:first')
-          .fadeOut(1000)
-          .next()
-          .fadeIn(1000)
-          .end()
-          .appendTo('#slideshow1');
-      }, 3000);
-
-      $("#slideshow2 > div:gt(0)").hide();
-
-      setInterval(function() {
-        $('#slideshow2 > div:first')
-          .fadeOut(1000)
-          .next()
-          .fadeIn(1000)
-          .end()
-          .appendTo('#slideshow2');
-      }, 3000);
     }
 
 
