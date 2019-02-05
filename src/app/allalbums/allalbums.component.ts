@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { SpotifyServiceService } from '../servicies/spotify-service.service';
 import { AlbumServiceService } from '../servicies/album-service.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-allalbums',
@@ -18,12 +19,14 @@ export class AllalbumsComponent implements OnInit {
   allAlbums : Album[];
   AlbumLinks : any;
   pages : number[] = [];
+  albumName: string;
 
   constructor(private apiService : ApiService,
     private albumService : AlbumServiceService,
     private router : Router,
     private srv : SpotifyServiceService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.GetAllAlbums();
@@ -90,6 +93,15 @@ export class AllalbumsComponent implements OnInit {
   goToArtists()
   {
     this.router.navigate(['allartists']);
+  }
+
+  getAlbumByName() {
+    this.albumService.getByName(this.albumName).subscribe((value: any) => {
+      if(value.values.length == 0) {
+        this.toastrService.error("This album is not existing!");
+      }
+      this.getAlbumContent(value.values[0]);
+    })
   }
 
 }

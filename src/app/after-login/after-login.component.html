@@ -4,32 +4,12 @@
         <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
       </div>
       <ul>
-        <li class="active"><a href="#">Home</a></li>
+        <li class="active"><a href="/after">Home</a></li>
         <li><a (click)="goToAlbums();">Albums</a></li>
         <li><a (click)="goToTracks();">Tracks</a></li>
         <li><a (click)="goToArtists();">Artists</a></li>
+        <li><a style="position: absolute; left:80%; top:3%;" href="/profile">Welcome, {{this.loggedUser}}</a></li>
       </ul>
-    </div>
-
-
-    <div class="create">
-      Can be seen only by admin
-      <h4>Insert album</h4>
-      <div class="insertalbum">
-          <div class="forms">
-              <form>
-                  <label for="aname"><b>Album name</b></label>
-                  <input type="text" [(ngModel)]="albumname" id="albumname" placeholder="Enter albumname" name="albumname" required>
-
-                  <label for="atype"><b>Album type</b></label>
-                  <input type="text" [(ngModel)]="albumtype" id="albumtype" placeholder="Enter albumtype" name="albumtype" required>
-
-                  <label for="auri"><b>Album Image</b></label>
-                  <input type="file" [(ngModel)]="albumuri" id="albumuri" placeholder="Enter albumuri" name="albumuri" accept="image/*" required>
-                  <input type="submit" value="SUBMIT">
-              </form>
-            </div>
-      </div>
     </div>
 
 
@@ -76,7 +56,7 @@
             <img src="{{artist.imgUri}}" alt="" height="35" width="35" (click)="generateArtistContent(artist)">
             <fa name="close" (click)="deleteArtistFromPlaylist(artist)" style="margin-left:10px;"></fa>
             <b style="color:white;">{{artist.name}}</b>
-            <fa name="chevron-circle-right" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
+            <fa name="chevron-circle-right" style="color:black; font-size:25px; position: absolute; left:80%;" (click)="generateArtistContent(artist)"></fa>
           </div>
           <ul>
             <li (click)="displayPreviousArtists()" style="position:absolute;">Previous</li>

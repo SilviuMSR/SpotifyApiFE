@@ -44,4 +44,9 @@ export class TrackServiceService {
     var queryParam = '?pageNumber=' + pageNumber + '&pageSize=5';
     return this.httpClient.get(this.trackURL + queryParam, {headers : this.headers}).pipe(map(map => map));
   }
+
+  getTrackByName(trackName: string) {
+    var queryParam = '?searchQuery=' + trackName
+    return this.httpClient.get(this.trackURL + queryParam, {headers : this.headers}).pipe(map(map => map));
+  }
 }

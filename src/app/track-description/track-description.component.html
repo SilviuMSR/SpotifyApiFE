@@ -5,10 +5,10 @@
             </div>
         </div>
         <div class="title">
-                <h1 style="text-align: center; padding-top:300px;">{{this.track.name}}</h1>
+                <h1 style="text-align: center; color:white; padding-top:300px; text-transform: uppercase;">{{this.track.name}}</h1>
             </div>
-            <fa name="pause" *ngIf="isPlayed == true" (click)="stopTrack()" style="color:black; font-size:25px; position:relative; left:50%; cursor: pointer;"></fa>
-            <fa name="play" *ngIf="isPlayed == false" (click)="playTrack(this.track)" style="color:black; font-size:25px; position:relative; left:50%; cursor: pointer;"></fa>
+            <fa name="pause" *ngIf="isPlayed == true" (click)="stopTrack()" style="color:white; font-size:25px; position:relative; left:50%; cursor: pointer;"></fa>
+            <fa name="play" *ngIf="isPlayed == false" (click)="playTrack(this.track)" style="color:white; font-size:25px; position:relative; left:50%; cursor: pointer;"></fa>
             <div class="create">
                     Can be seen only by admin
                     <h4>Insert artist</h4>

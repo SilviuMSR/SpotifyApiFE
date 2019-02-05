@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../servicies/user.service';
 import { User } from '../models/userModel';
 import { HttpHeaderResponse, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private toastrService: ToastrService) { }
 
   username: string;
   password: string;
@@ -34,11 +36,14 @@ export class LoginComponent implements OnInit {
 
     this.userService.loginUser(this.user).subscribe((value : any) => {
       localStorage.setItem('token', value.body.token);
+      localStorage.setItem('username', this.username);
+      console.log(value.body);
+      this.toastrService.success("Successfully connected!");
       this.router.navigate(['after']);
     },
     err => {
       if(err.status == 401) {
-        alert('Not valid accoun!');
+        this.toastrService.error("Sorry, this account is not existing!");
       }
     });
   }

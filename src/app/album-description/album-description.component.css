@@ -58,7 +58,7 @@ ul li a:hover {
   color: #000;
 }
 
-#trackpart {
+table {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 40%;
@@ -67,37 +67,54 @@ ul li a:hover {
   left:5%;
 }
 
-#trackpart td, #trackpart th {
+.table tr.active .button {
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  width: 0;
+  height: 30px;
+
+  border-color: transparent transparent transparent #fff;
+  transition: 100ms all ease;
+  cursor: pointer;
+
+  border-style: double;
+  border-width: 0px 0 0px 30px;
+}
+
+.table tr .button {
+  border: 0;
+  background: transparent;
+  box-sizing: border-box;
+  width: 0;
+  height: 20px;
+
+  border-color: transparent transparent transparent #fff;
+  transition: 100ms all ease;
+  cursor: pointer;
+
+  border-style: solid;
+  border-width: 10px 0 10px 30px;
+}
+
+/*table td, table th {
   border: 1px solid transparent;
   padding: 8px;
   text-align:center;
 }
 
-#trackpart tr:hover {background-color: #ddd;}
-
-#trackpart th {
+table th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: center;
   color: white;
-}
-
-
-.audio_btn {
-  width: 32px;
-  height: 32px;
-  background: url('../../assets/images/play.png');
-  background-size: cover;
-}
-.audio_box.active_state .audio_btn{
-  background-image: url('../../assets/images/pause.png');
-}
+}*/
 
 .create {
   margin: auto;
   position: absolute;
   top: 35%;
-  left:70%;
+  left:60%;
   width: 25%;
   height: 50%;
   padding: 10px;

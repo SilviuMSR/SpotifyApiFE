@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^7.2.1",
+    "@angular/animations": "^7.2.3",
     "@angular/cdk": "^7.2.1",
     "@angular/common": "~7.1.0",
     "@angular/compiler": "~7.1.0",
@@ -26,7 +26,9 @@
     "core-js": "^2.5.4",
     "flexbox": "0.0.3",
     "font-awesome": "^4.7.0",
+    "fontawesome": "^5.6.3",
     "jquery": "^3.3.1",
+    "ngx-toastr": "^9.1.1",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
     "underscore": "^1.9.1",

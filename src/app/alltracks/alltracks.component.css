@@ -12,7 +12,7 @@
   }
 
   ul {
-    float: right;
+    float: left;
     list-style-type: none;
     margin-top: 25px;
   }
@@ -100,4 +100,33 @@ header h2 {
     position: absolute;
     left: 39%;
     top: 15%;
+}
+
+.search-container {
+  position: absolute;
+  top:14%;
+  left: 80%;
+}
+
+input[type=text] {
+padding: 6px;
+margin-top: 8px;
+font-size: 17px;
+border-radius:20px;
+}
+
+.search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: transparent;
+  border:none;
+  font-size: 17px;
+  cursor: pointer;
+  color:white;
+}
+
+.search-container button:hover {
+background: #ccc;
 }

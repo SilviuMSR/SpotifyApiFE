@@ -19,6 +19,7 @@ export class UserService {
   headers : any;
 
   private userURL = 'https://localhost:5001/api/user'
+  private requestURL = 'https://localhost:5001/api/request'
 
   registerUser(user : User) {
     return this.httpClient.post(this.userURL, {UserName: user.username, Password: user.password, Href: user.href}, {headers : this.headers, observe: 'response'}).pipe(map(map => map));
@@ -26,7 +27,9 @@ export class UserService {
 
   loginUser(user : User){
     return this.httpClient.post(this.userURL + '/login', {Username: user.username, Password: user.password}, {headers : this.headers, observe: 'response'}).pipe(map(map => map));
-  }
+  }  
 
-  
+  getRequests() {
+    return this.httpClient.get(this.requestURL, {headers: this.headers}).pipe(map(map => map));
+  }
 }

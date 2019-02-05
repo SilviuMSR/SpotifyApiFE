@@ -50,6 +50,7 @@ export class AfterLoginComponent implements OnInit {
 
   audio : any;
   isPlayed : boolean = false;
+  loggedUser : any;
 
   constructor(
     private loginService: LoginService,
@@ -75,6 +76,7 @@ export class AfterLoginComponent implements OnInit {
      this.getTopTracks();
 
      this.audio = new Audio();
+     this.loggedUser = localStorage.getItem('username');
      
     }
 
@@ -114,7 +116,9 @@ export class AfterLoginComponent implements OnInit {
     {
       if(album.playlistAlbumId != null)
       {
-        this.router.navigate(['albumdescription/' + album.playlistAlbumId]);
+        this.albumService.getByName(album.name).subscribe((value: any) => {
+          this.router.navigate(['albumdescription/' + value.values[0].albumId]);
+        })
       }
       else
       {
@@ -124,12 +128,26 @@ export class AfterLoginComponent implements OnInit {
   
     generateArtistContent(artist : Artist)
     {
-      this.router.navigate(['artistdescription/' + artist.artistId]);
+      if(artist.playlistArtistId != null) {
+        this.artistService.getByName(artist.name).subscribe((value: any) => {
+          this.router.navigate(['artistdescription/' + value.values[0].artistId]);
+        })
+      }
+      else {
+        this.router.navigate(['artistdescription/' + artist.artistId]);
+      }
     }
   
     generateTrackContent(track : Track)
     {
-      this.router.navigate(['trackdescription/' + track.trackId]);
+      if(track.playlistTrackId != null) {
+        this.trackService.getTrackByName(track.name).subscribe((value: any) => {
+          this.router.navigate(['trackdescription/' + value.values[0].trackId]);
+        })
+      }
+      else {
+        this.router.navigate(['trackdescription/' + track.trackId]);
+      }
     }
 
     goToAlbums()

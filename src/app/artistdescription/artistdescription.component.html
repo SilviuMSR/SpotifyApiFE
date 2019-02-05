@@ -6,12 +6,11 @@
         </div>
         <ul>
             <li><a href="/artistdescription/{{artist.id}}">PLAYLIST</a></li>
-            <li><a href="/artistdescription/{{artist.id}}">ABOUT</a></li>
             <li><a (click)="insertArtistToPlaylist(artist)" style="cursor: pointer;">INSERT TO PLAYLIST</a></li>
             <li class="back"><a href="/after">BACK</a></li>
         </ul>
         <div class="title">
-            <h1>{{this.artist.name}}</h1>
+            <h1 style="text-transform: uppercase;">{{this.artist.name}}</h1>
         </div>
         <table id="trackpart">
                 <tr>

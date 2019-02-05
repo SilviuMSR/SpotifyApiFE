@@ -11,6 +11,7 @@ import { AfterLoginComponent } from './after-login/after-login.component';
 import { AllalbumsComponent } from './allalbums/allalbums.component';
 import { AllartistsComponent } from './allartists/allartists.component';
 import { AlltracksComponent } from './alltracks/alltracks.component';
+import { ProfileComponent } from './profile/profile.component';
 
 export const ROUTES = [
     { path: '',  component: HomeComponent },
@@ -23,5 +24,6 @@ export const ROUTES = [
     { path: 'allalbums', component: AllalbumsComponent},
     { path: 'allartists', component: AllartistsComponent},
     { path: 'alltracks', component: AlltracksComponent},
+    { path: 'profile', component: ProfileComponent},
     { path: '**', component: NotFoundComponent }
 ];

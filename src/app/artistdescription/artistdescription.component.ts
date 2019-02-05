@@ -8,6 +8,7 @@ import { ArtistServiceService } from '../servicies/artist-service.service';
 import { TrackServiceService } from '../servicies/track-service.service';
 import { PlaylistTrackService } from '../servicies/playlist-track.service';
 import { PlaylistartistService } from '../servicies/playlistartist.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-artistdescription',
@@ -25,7 +26,8 @@ export class ArtistdescriptionComponent implements OnInit {
     private apiService : ApiService,
     private playlistTrackService : PlaylistTrackService,
     private playlistArtistService : PlaylistartistService,
-    private sanitization:DomSanitizer) { }
+    private sanitization:DomSanitizer,
+    private toastrService: ToastrService) { }
 
   id : string;
   artist : Artist;
@@ -64,6 +66,7 @@ export class ArtistdescriptionComponent implements OnInit {
   addToPlaylist(track: Track) {
     //this.apiService.post('/playlistTrack', {Name: track.name, PreviewUrl: track.previewUrl, Href:track.href}).subscribe();
     this.playlistTrackService.insertTrackToPlaylist(track).subscribe();
+    this.toastrService.success("Successfully added to playlist!");
   }
 
   playTrack(track: Track)
@@ -84,6 +87,7 @@ export class ArtistdescriptionComponent implements OnInit {
   {
     //this.srv.insertAlbumToPlaylist(album.albumId);
     this.playlistArtistService.insertArtistToPlaylist(artist.artistId);
+    this.toastrService.success("Successfully added to playlist!");
   }
 
 

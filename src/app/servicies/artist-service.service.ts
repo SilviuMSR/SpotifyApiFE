@@ -44,4 +44,10 @@ export class ArtistServiceService {
   getArtist(id : string) {
     return this.httpClient.get(this.artistURL + '/' + id, {headers : this.headers}).pipe(map(map => map));
   }
+
+  getByName(artistName: string) {
+    var queryParam = '?searchQuery=' + artistName;
+    return this.httpClient.get(this.artistURL + queryParam, {headers : this.headers}).pipe(map(map => map));
+   }
+
 }

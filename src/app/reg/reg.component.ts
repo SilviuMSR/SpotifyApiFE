@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../servicies/user.service';
 import { User } from '../models/userModel';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-reg',
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 export class RegComponent implements OnInit {
 
   constructor(private userService: UserService,
-    private router: Router) { }
+    private router: Router,
+    private toastrService: ToastrService) { }
 
   ngOnInit() {
   }
@@ -30,15 +32,15 @@ export class RegComponent implements OnInit {
 
     this.userService.registerUser(this.user).subscribe(() => {
       this.router.navigate(['login']);
-      alert('Your account was successfuly created!')
+      this.toastrService.success("Your account was successfully created!")
     },
     err => {
       if (err.error[0].code == "DuplicateUserName") {
-        alert('This account already exist');
+        this.toastrService.error('This account already exist');
       }
       else if(err.error[0].code == "PasswordTooShort")
       {
-        alert('You must insert a longer password');
+        this.toastrService.error('You must insert a longer password');
       }
     })
   }

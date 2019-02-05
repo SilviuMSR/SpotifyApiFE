@@ -11,6 +11,14 @@
       </ul>
     </div>
   <div>
+
+    <div class="search-container">
+        <form>
+            <input type="text" [(ngModel)]="trackName" placeholder="Insert track name..." name="search">
+            <button type="submit"><fa name="search" (click)="getTrackByName()"></fa></button>
+        </form>
+    </div>
+
   <h2>Current available tracks</h2>
   <div class="row" style="position:absolute; top:35%;">
       <div *ngFor="let track of this.allTracks" style="padding-left:50px;">

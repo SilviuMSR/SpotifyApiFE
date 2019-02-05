@@ -26,6 +26,9 @@ import { AllalbumsComponent } from './allalbums/allalbums.component';
 import { AlltracksComponent } from './alltracks/alltracks.component';
 import { AllartistsComponent } from './allartists/allartists.component';
 import * as _ from 'underscore';
+import { ProfileComponent } from './profile/profile.component';
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -45,7 +48,8 @@ import * as _ from 'underscore';
     AfterLoginComponent,
     AllalbumsComponent,
     AlltracksComponent,
-    AllartistsComponent
+    AllartistsComponent,
+    ProfileComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES),
@@ -53,7 +57,11 @@ import * as _ from 'underscore';
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,
-    
+    ToastrModule.forRoot({
+      timeOut: 5000,
+      positionClass: 'toast-bottom-left',
+      preventDuplicates: true,
+    }),
 
   ],
   providers: [  ],

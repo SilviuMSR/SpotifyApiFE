@@ -4,16 +4,15 @@
             <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
         </div>
         <ul>
-            <li><a href="/albumdescription/{{album.id}}">Overview</a></li>
-            <li><a href="/albumdescription/{{album.id}}">About</a></li>
-            <li><a style="cursor: pointer;" (click)="insertAlbumToPlaylist(album)">Add to playlist</a></li>
-            <li><a style="cursor: pointer;" routerLink="/after">Back</a></li>
+            <li><a href="/albumdescription/{{this.id}}">OVERVIEW</a></li>
+            <li><a style="cursor: pointer;" (click)="insertAlbumToPlaylist(album)">ADD TO PLAYLIST</a></li>
+            <li><a style="cursor: pointer;" routerLink="/after">BACK</a></li>
         </ul>
     </div>
     <div class="title">
-        <h1>{{this.album.name}}</h1>
+        <h1 style="text-transform: uppercase;">{{this.album.name}}</h1>
     </div>
-    <div class="create">
+    <div class="create" *ngIf="isAdmin">
             Can be seen only by admin
             <h4>Insert track</h4>
             <div class="inserttrack">
@@ -26,19 +25,20 @@
                         <input type="text" [(ngModel)]="trackpreview" id="trackpreview" placeholder="Enter trackpreview" name="trackpreview" accept="image/*" required>
 
                         <label for="thref"><b>Track href</b></label>
-                        <input type="file" [(ngModel)]="trackhref" id="trackhref" placeholder="Enter trackhref" name="trackhref" accept="image/*" required>
+                        <input type="text" [(ngModel)]="trackhref" id="trackhref" placeholder="Enter trackhref" name="trackhref" required>
                         <input type="submit" value="SUBMIT">
                     </form>
                   </div>
             </div>
           </div>
-    <table id="trackpart">
+    <!--<table>
         <tr>
             <th></th>
             <th></th>
             <th>Track name</th>
             <th>Love it?</th>
-        </tr> 
+        </tr>
+        <tbody> 
         <tr *ngFor="let track of this.tracks | slice:0:5; let i = index">
             <th>{{i}}</th>
             <th>
@@ -48,5 +48,29 @@
             <th>{{track.name}}</th>
             <th><fa name="heart" (click)="addToPlaylist(track)" style="color:red; font-size:25px;"></fa></th>
         </tr>
-    </table>
+        </tbody>
+    </table>-->
+
+    <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>Track Name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let track of tracks; let i = index" (click)="setClickedRow(i)" [class.active]="i == selectedRow">
+                    <td>{{i}}</td>
+                    <td>
+                        <button (click)="isPlayed == true ? stopTrack(track) : playTrack(track)" class='button'></button>
+                    </td>
+                    <td style="color:white">{{track.name}}</td>
+                    <td><fa name="heart" (click)="addToPlaylist(track)" style="color:red; font-size:25px;"></fa></td>
+                </tr>
+            </tbody>
+        </table>
+
 </header>
+

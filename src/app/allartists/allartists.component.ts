@@ -16,6 +16,7 @@ export class AllartistsComponent implements OnInit {
   allArtists : Artist[] = [];
   artistLinks : any;
   pages : number[] = [];
+  artistName: any;
 
   ngOnInit() {
     this.getAllArtists();
@@ -58,6 +59,15 @@ export class AllartistsComponent implements OnInit {
   goToArtists()
   {
     this.route.navigate(['allartists']);
+  }
+
+  getArtistByName() {
+    this.artistService.getByName(this.artistName).subscribe((value: any) => {
+      if(value.values.length == 0) {
+        alert("Artist not found");
+      }
+      this.getArtistContent(value.values[0]);
+    })
   }
 
 }

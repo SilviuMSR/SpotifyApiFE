@@ -11,6 +11,12 @@
       </ul>
     </div>
   <div>
+    <div class="search-container">
+        <form>
+            <input type="text" [(ngModel)]="artistName" placeholder="Insert artist name..." name="search">
+            <button type="submit"><fa name="search" (click)="getArtistByName()"></fa></button>
+        </form>
+    </div>
   <h2>Current available artists</h2>
   <div class="row" style="position:absolute; top:35%;">
       <div *ngFor="let artist of this.allArtists" style="padding-left:50px;">

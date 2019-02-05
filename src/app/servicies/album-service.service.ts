@@ -50,4 +50,13 @@ export class AlbumServiceService {
      return this.httpClient.get(this.albumURL + queryParam, {headers : this.headers}).pipe(map(map => map));
    }
 
+   getByName(albumName: string) {
+    var queryParam = '?searchQuery=' + albumName;
+    return this.httpClient.get(this.albumURL + queryParam, {headers : this.headers}).pipe(map(map => map));
+   }
+
+   insertAlbum(album: Album) {
+     return this.httpClient.post(this.albumURL, {Name: album.name, Type: album.type, ImgUri: album.imgUri} ,{headers: this.headers}).pipe(map(map => map));
+   }
+
 }

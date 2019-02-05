@@ -12,6 +12,14 @@
       </div>
     <div>
     <h2>Current available albums</h2>
+
+    <div class="search-container">
+        <form>
+          <input type="text" [(ngModel)]="albumName" placeholder="Insert album name..." name="search">
+          <button type="submit"><fa name="search" (click)="getAlbumByName()"></fa></button>
+        </form>
+      </div>
+
     <div class="row" style="position:absolute; top:35%;">
         <div *ngFor="let album of this.allAlbums" style="padding-left:50px;">
             <!--<button (click)="insertAlbumToPlaylist(album)">Add</button>-->

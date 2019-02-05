@@ -19,6 +19,7 @@ export class AlltracksComponent implements OnInit {
   allTracks : Track[];
   trackLinks : any;
   pages : number[] = [];
+  trackName: any;
 
   ngOnInit() {
     this.getAllTracks();
@@ -31,7 +32,6 @@ export class AlltracksComponent implements OnInit {
     this.trackService.getTopTracks().subscribe((value : any) => {
       this.allTracks = value.values;
       this.trackLinks = value.links;
-      console.log(this.trackLinks);
       for(var i = 1; i <= this.trackLinks.totalPages; i++)
       {
         this.pages[i] = i;
@@ -66,6 +66,15 @@ export class AlltracksComponent implements OnInit {
   goToArtists()
   {
     this.route.navigate(['allartists']);
+  }
+
+  getTrackByName() {
+    this.trackService.getTrackByName(this.trackName).subscribe((value: any) => {
+      if(value.values.length == 0) {
+        alert("Track not found");
+      }
+      this.getTrackContent(value.values[0]);
+    })
   }
 
 }
