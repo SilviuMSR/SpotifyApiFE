@@ -12,7 +12,8 @@
     <div class="title">
         <h1 style="text-transform: uppercase;">{{this.album.name}}</h1>
     </div>
-    <div class="create" *ngIf="isAdmin">
+
+    <div class="create" *appHasRole="['Admin']">
             Can be seen only by admin
             <h4>Insert track</h4>
             <div class="inserttrack">
@@ -61,7 +62,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let track of tracks; let i = index" [class.active]="i == selectedRow">
+                <tr *ngFor="let track of tracks | slice:0:5; let i = index" [class.active]="i == selectedRow">
                     <td style="color:white;">{{i}}</td>
                     <td (click)="setClickedRow(i)"> 
                         <button (click)="isPlayed == true ? stopTrack(track) : playTrack(track)" class='button'></button>

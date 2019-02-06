@@ -20,6 +20,7 @@ export class RegComponent implements OnInit {
 
   username: string;
   password: string;
+  useremail: string;
   href: string;
   user: User;
 
@@ -27,6 +28,7 @@ export class RegComponent implements OnInit {
     this.user = {
       username: this.username,
       password: this.password,
+      email: this.useremail,
       href: 'here should be a href'
     };
 

@@ -15,15 +15,15 @@ import { ProfileComponent } from './profile/profile.component';
 
 export const ROUTES = [
     { path: '',  component: HomeComponent },
-    { path: 'artistdescription/:id', component: ArtistdescriptionComponent},
+    { path: 'artistdescription/:id', component: ArtistdescriptionComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
     { path: 'login', component: LoginComponent},
     { path: 'reg', component: RegComponent},
-    { path: 'albumdescription/:id', component: AlbumDescriptionComponent},
-    { path: 'trackdescription/:id', component : TrackDescriptionComponent},
-    { path: 'after', component: AfterLoginComponent},
-    { path: 'allalbums', component: AllalbumsComponent},
-    { path: 'allartists', component: AllartistsComponent},
-    { path: 'alltracks', component: AlltracksComponent},
-    { path: 'profile', component: ProfileComponent},
+    { path: 'albumdescription/:id', component: AlbumDescriptionComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
+    { path: 'trackdescription/:id', component : TrackDescriptionComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
+    { path: 'after', component: AfterLoginComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
+    { path: 'allalbums', component: AllalbumsComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
+    { path: 'allartists', component: AllartistsComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
+    { path: 'alltracks', component: AlltracksComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
+    { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
     { path: '**', component: NotFoundComponent }
 ];

@@ -9,7 +9,7 @@
             </div>
             <fa name="pause" *ngIf="isPlayed == true" (click)="stopTrack()" style="color:white; font-size:25px; position:relative; left:50%; cursor: pointer;"></fa>
             <fa name="play" *ngIf="isPlayed == false" (click)="playTrack(this.track)" style="color:white; font-size:25px; position:relative; left:50%; cursor: pointer;"></fa>
-            <div class="create">
+            <div class="create" *appHasRole="['Admin']">
                     Can be seen only by admin
                     <h4>Insert artist</h4>
                     <div class="insertartist">

@@ -42,7 +42,6 @@ export class AlbumDescriptionComponent implements OnInit {
   backgroundStyle: any;
   audio : any;
   isPlayed : boolean = false;
-  isAdmin: boolean = false;
   selectedRow : Number;
   setClickedRow : Function;
  

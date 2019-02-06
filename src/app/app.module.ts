@@ -28,6 +28,7 @@ import { AllartistsComponent } from './allartists/allartists.component';
 import * as _ from 'underscore';
 import { ProfileComponent } from './profile/profile.component';
 import { ToastrModule } from 'ngx-toastr';
+import { HasRoleDirective } from './directive/has-role.directive';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ToastrModule } from 'ngx-toastr';
     AllalbumsComponent,
     AlltracksComponent,
     AllartistsComponent,
-    ProfileComponent
+    ProfileComponent,
+    HasRoleDirective
   ],
   imports: [
     RouterModule.forRoot(ROUTES),

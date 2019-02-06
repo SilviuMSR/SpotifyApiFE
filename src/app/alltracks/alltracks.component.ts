@@ -32,6 +32,7 @@ export class AlltracksComponent implements OnInit {
     this.trackService.getTopTracks().subscribe((value : any) => {
       this.allTracks = value.values;
       this.trackLinks = value.links;
+      console.log(value.links)
       for(var i = 1; i <= this.trackLinks.totalPages; i++)
       {
         this.pages[i] = i;

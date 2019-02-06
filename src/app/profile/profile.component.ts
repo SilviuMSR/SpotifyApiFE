@@ -16,7 +16,6 @@ export class ProfileComponent implements OnInit {
     private albumService: AlbumServiceService) { }
 
   username: string;
-  isAdmin: boolean = false;
 
   allRequests: any;
   allRequestsLinks: any;
@@ -69,6 +68,11 @@ export class ProfileComponent implements OnInit {
         alert("Album not inserted");
       }
     })
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['login']);
   }
 
 }

@@ -2,29 +2,38 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LoginService } from './servicies/login.service';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { SpotifyServiceService } from './servicies/spotify-service.service';
+import { UserService } from './servicies/user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private loginService: LoginService,
+  constructor(private userService: UserService,
               private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if(localStorage.getItem('token') == null)
-    {
-      console.log('nu');
-      this.router.navigate(['login']);
-      return false;
-    }
-  
       
-      return true;
-    
+      const roles = next.data['roles'] as Array<string>;
+      if(roles) {
+        const match = this.userService.roleMatch(roles);
+        if(match) {
+          return true;
+        }
+        else 
+        {
+          this.router.navigate(['login']);
+          return false;
+        }
+      }
+
+      if(localStorage.getItem('username') != null)
+      {
+        return true;
+      }
+
+      return false;
   }
 }

@@ -6,6 +6,7 @@ import { UserService } from '../servicies/user.service';
 import { User } from '../models/userModel';
 import { HttpHeaderResponse, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -14,16 +15,19 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(
-    private userService: UserService,
-    private router: Router,
-    private toastrService: ToastrService) { }
-
   username: string;
   password: string;
   user: User;
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private toastrService: ToastrService) {
+
+     }
   
   ngOnInit() {
+    
   }
 
   loginUser() {
@@ -31,23 +35,22 @@ export class LoginComponent implements OnInit {
     this.user = {
       username: this.username,
       password: this.password,
-      href: 'here should be a href'
+      href: 'here should be a href',
     };
 
-    this.userService.loginUser(this.user).subscribe((value : any) => {
+    this.userService.loginUser(this.user);
+
+    /*this.userService.loginUser(this.user).subscribe((value : any) => {
       localStorage.setItem('token', value.body.token);
+      this.user.token = value.body.token;
       localStorage.setItem('username', this.username);
-      //localStorage.setItem('username', JSON.stringify(this.user));
-      console.log(value.body);
-      this.toastrService.success("Successfully connected!");
       this.router.navigate(['after']);
     },
     err => {
       if(err.status == 401) {
         this.toastrService.error("Sorry, this account is not existing!");
       }
-    });
+    });*/
   }
-
 
 }
