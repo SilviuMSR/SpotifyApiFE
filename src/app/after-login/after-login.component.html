@@ -42,8 +42,7 @@
             <img src="{{track.href}}" alt="" height="35" width="35" (click)="generateTrackContent(track)">
             <fa name="close" (click)="deleteTrackFromPlaylist(track)" style="margin-left:10px;"></fa>
             <b style="color:white;">{{track.name}}</b>
-            <fa name="play" *ngIf="isPlayed==false" (click)="playTrack(track);" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
-            <fa name="pause" *ngIf="isPlayed==true" (click)="stopTrack();" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
+            <fa name="play" *ngIf="isPlayed==false" (click)="generateTrackContent(track)" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
           </div>
           <ul>
             <li (click)="displayPreviousTracks()" style="position:absolute;">Previous</li>

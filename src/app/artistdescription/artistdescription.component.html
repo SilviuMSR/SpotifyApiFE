@@ -12,21 +12,24 @@
         <div class="title">
             <h1 style="text-transform: uppercase;">{{this.artist.name}}</h1>
         </div>
-        <table id="trackpart">
+        <table class="table table-hover">
+            <thead>
                 <tr>
                     <th></th>
                     <th></th>
-                    <th>Track name</th>
-                    <th>Love it?</th>
-                </tr> 
-                <tr *ngFor="let track of tracks | slice:0:5; let i = index">
-                    <th>{{i}}</th>
-                    <th>
-                        <fa name="play" *ngIf="!isPlayed" (click)="playTrack(track)" style="color:red; font-size:25px;"></fa>
-                        <fa name="stop" *ngIf="isPlayed" (click)="stopTrack()" style="color:red; font-size:25px;"></fa>
-                    </th>
-                    <th>{{track.name}}</th>
-                    <th><fa name="heart" (click)="addToPlaylist(track)" style="color:red; font-size:25px;"></fa></th>
+                    <th style="color:white;">Track Name</th>
+                    <th></th>
                 </tr>
-            </table>
+            </thead>
+            <tbody>
+                <tr *ngFor="let track of tracks; let i = index" [class.active]="i == selectedRow">
+                    <td style="color:white;">{{i}}</td>
+                    <td (click)="setClickedRow(i)">
+                        <button (click)="isPlayed == true ? stopTrack(track) : playTrack(track)" class='button'></button>
+                    </td>
+                    <td style="color:white">{{track.name}}</td>
+                    <td><fa name="heart" (click)="addToPlaylist(track)" style="color:red; font-size:25px;"></fa></td>
+                </tr>
+            </tbody>
+        </table>
     </header>

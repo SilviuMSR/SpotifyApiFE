@@ -35,6 +35,8 @@ export class ArtistdescriptionComponent implements OnInit {
   backgroundStyle: any;
   audio : any;
   isPlayed : boolean = false;
+  selectedRow : Number;
+  setClickedRow : Function;
 
   ngOnInit() {
     this.activatedRoute.params.subscribe( params => {
@@ -42,6 +44,11 @@ export class ArtistdescriptionComponent implements OnInit {
     });
     this.audio = new Audio();
     this.getContent();
+    this.setClickedRow = function(index){
+      if(this.selectedRow == null)
+        this.selectedRow = index;
+      else this.selectedRow = null;
+    }
   }
 
   getContent()
