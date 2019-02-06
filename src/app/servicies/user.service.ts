@@ -32,4 +32,8 @@ export class UserService {
   getRequests() {
     return this.httpClient.get(this.requestURL, {headers: this.headers}).pipe(map(map => map));
   }
+
+  testFunction() {
+    console.log("This is a test for new branch");
+  }
 }
