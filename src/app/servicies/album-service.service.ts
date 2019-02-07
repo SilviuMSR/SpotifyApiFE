@@ -59,4 +59,8 @@ export class AlbumServiceService {
      return this.httpClient.post(this.albumURL, {Name: album.name, Type: album.type, ImgUri: album.imgUri} ,{headers: this.headers}).pipe(map(map => map));
    }
 
+   insertTrackToAlbum(id: number, track: Track) {
+      return this.httpClient.patch(this.albumURL + '/' + id + '/track', {Name: track.name, Href: track.href, PreviewUrl: track.previewUrl}, {headers: this.headers}).pipe(map(map => map));
+   }
+
 }

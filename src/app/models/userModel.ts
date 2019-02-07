@@ -4,5 +4,5 @@ export class User {
     role?: string;
     token?: string;
     email?: string;
-    href: string;
+    href?: string;
 }

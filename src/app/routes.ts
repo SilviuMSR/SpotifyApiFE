@@ -12,6 +12,7 @@ import { AllalbumsComponent } from './allalbums/allalbums.component';
 import { AllartistsComponent } from './allartists/allartists.component';
 import { AlltracksComponent } from './alltracks/alltracks.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 export const ROUTES = [
     { path: '',  component: HomeComponent },
@@ -25,5 +26,6 @@ export const ROUTES = [
     { path: 'allartists', component: AllartistsComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
     { path: 'alltracks', component: AlltracksComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
     { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: {roles: ['Admin', 'User']}},
+    { path: 'admin', component: AdminComponent, canActivate: [AuthGuard], data: {roles: ['Admin']}},
     { path: '**', component: NotFoundComponent }
 ];

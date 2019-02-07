@@ -17,6 +17,7 @@ import { PlaylistTrackService } from '../servicies/playlist-track.service';
 import { PlaylistartistService } from '../servicies/playlistartist.service';
 import { LoginComponent } from '../login/login.component';
 import { UserService } from '../servicies/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-after-login',
@@ -65,12 +66,18 @@ export class AfterLoginComponent implements OnInit {
     private playlistAlbumService: PlaylistAlbumService,
     private playlistTrackService: PlaylistTrackService,
     private playlistArtistService: PlaylistartistService,
+    private toastr: ToastrService
     ) {
       
     }
 
     ngOnInit() {
      
+
+      this.playlistAlbums = [];
+      this.playlistTracks = [];
+      this.playlistArtists = [];
+      console.log(this.playlistAlbums)
      this.getTopArtists();
      this.getTopAlbums();
      this.getTopTracks();
@@ -188,6 +195,7 @@ export class AfterLoginComponent implements OnInit {
       this.playlistArtistService.displayPlaylistArtist().subscribe((value : any) => {
         this.playlistArtists = value.values;
         this.playlistArtistLinks = value.links;
+        console.log(this.playlistArtists);
       })
     }
 
@@ -210,6 +218,7 @@ export class AfterLoginComponent implements OnInit {
         location.reload();
       });*/
       this.playlistArtistService.deleteArtistFromPlaylist(artist).subscribe(() => {
+        this.toastr.success("Successfully deleted!");
         location.reload();
       })
     }
@@ -224,6 +233,7 @@ export class AfterLoginComponent implements OnInit {
       })*/
       this.playlistAlbumService.displayPlaylistAlbum().subscribe((value : any) => {
         this.playlistAlbums = value.values;
+        console.log(this.playlistAlbums);
         this.playlistAlbumLinks = value.links;
       })
     }
@@ -305,8 +315,9 @@ export class AfterLoginComponent implements OnInit {
       /*this.apiService.delete('/playlistAlbum/' + album.playlistAlbumId).subscribe((value : any) =>{
         location.reload();
       });*/
-      this.playlistAlbumService.deleteAlbumFromPlaylist(album).subscribe(() => {
+      this.playlistAlbumService.deleteAlbumFromPlaylist(album).subscribe((value: any) => {
         location.reload();
+        this.toastr.success("Successfully deleted!");
       })
     }
 
@@ -317,6 +328,8 @@ export class AfterLoginComponent implements OnInit {
       })*/
       this.playlistTrackService.deleteTrackFromPlaylist(track).subscribe( () => {
         location.reload();
+        this.toastr.success("Successfully deleted!");
+
       });
     }
 

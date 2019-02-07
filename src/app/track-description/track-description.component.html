@@ -19,8 +19,8 @@
                                 <input type="text" [(ngModel)]="artistname" id="artistname" placeholder="Enter artistname" name="artistname" required>
 
                                 <label for="aruri"><b>Artist Image</b></label>
-                                <input type="file" [(ngModel)]="artisturi" id="artisturi" placeholder="Enter artisturi" name="artisturi" accept="image/*" required>
-                                <input type="submit" value="SUBMIT">
+                                <input type="text" [(ngModel)]="artisturi" id="artisturi" placeholder="Enter artisturi" name="artisturi" required>
+                                <input type="submit" (click)="createArtistToTrack()" value="SUBMIT">
                             </form>
                           </div>
                     </div>

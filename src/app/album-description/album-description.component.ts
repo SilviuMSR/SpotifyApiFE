@@ -44,9 +44,15 @@ export class AlbumDescriptionComponent implements OnInit {
   isPlayed : boolean = false;
   selectedRow : Number;
   setClickedRow : Function;
+
+  trackname: string;
+  trackpreview: string;
+  trackhref: string;
+  trackToAdd: Track;
  
 
   ngOnInit() {
+    this.tracks = [];
     this.activatedRoute.params.subscribe( params => {
       this.id = params['id']
     });
@@ -110,5 +116,16 @@ export class AlbumDescriptionComponent implements OnInit {
     //this.srv.insertAlbumToPlaylist(album.albumId);
     this.playlistAlbumService.insertAlbumToPlaylist(album.albumId);
     this.toastrService.success("Successfully added to playlist!");
+  }
+
+  createNewTrack() {
+    this.trackToAdd = {
+      name: this.trackname,
+      href: this.trackhref,
+      previewUrl: this.trackpreview
+    };
+    this.albumService.insertTrackToAlbum(this.id, this.trackToAdd).subscribe((value: any) => {
+      if(value != null) this.toastrService.success("Track added successfully!");
+    });
   }
 }

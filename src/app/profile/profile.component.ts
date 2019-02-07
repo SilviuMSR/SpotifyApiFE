@@ -3,6 +3,7 @@ import { UserService } from '../servicies/user.service';
 import { Router } from '@angular/router';
 import { AlbumServiceService } from '../servicies/album-service.service';
 import { Album } from '../models/album';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -13,7 +14,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(private userService: UserService,
     private router: Router,
-    private albumService: AlbumServiceService) { }
+    private albumService: AlbumServiceService,
+    private toastr: ToastrService) { }
 
   username: string;
 
@@ -73,6 +75,7 @@ export class ProfileComponent implements OnInit {
   logout() {
     localStorage.clear();
     this.router.navigate(['login']);
+    this.toastr.success("Successfully logged out!");
   }
 
 }

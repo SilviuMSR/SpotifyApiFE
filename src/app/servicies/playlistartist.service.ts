@@ -39,7 +39,7 @@ export class PlaylistartistService {
 
     var queryParams = '?pageNumber=' + this.defaultStartPage + '&pageSize=' + this.defaultPageSize;
 
-    return this.httpClient.get(this.playlistArtistURL + queryParams, {headers: this.headers}).pipe(map(map => map));
+    return this.httpClient.get(this.playlistArtistURL, {headers: this.headers}).pipe(map(map => map));
    }
 
    getArtistContent(artistId : number) : Observable<Artist> {

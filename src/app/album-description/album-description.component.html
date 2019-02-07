@@ -27,7 +27,7 @@
 
                         <label for="thref"><b>Track href</b></label>
                         <input type="text" [(ngModel)]="trackhref" id="trackhref" placeholder="Enter trackhref" name="trackhref" required>
-                        <input type="submit" value="SUBMIT">
+                        <input type="submit" (click)="createNewTrack()" value="SUBMIT">
                     </form>
                   </div>
             </div>

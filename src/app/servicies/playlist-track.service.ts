@@ -37,7 +37,7 @@ export class PlaylistTrackService {
 
     var queryParams = '?pageNumber=' + this.defaultStartPage + '&pageSize=' + this.defaultPageSize;
 
-    return this.httpClient.get(this.playlistTrackURL + queryParams, {headers: this.headers}).pipe(map(map => map));
+    return this.httpClient.get(this.playlistTrackURL, {headers: this.headers}).pipe(map(map => map));
    }
 
    displayNextTracks(nextLink : any) {
@@ -53,6 +53,7 @@ export class PlaylistTrackService {
    }
 
    insertTrackToPlaylist(track : Track) {
+
     return this.httpClient.post(this.playlistTrackURL, {Name: track.name, PreviewUrl: track.previewUrl, Href:track.href}, {headers : this.headers}).pipe(map(map => map));
    }
 

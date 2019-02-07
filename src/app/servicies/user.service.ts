@@ -5,6 +5,7 @@ import { User } from '../models/userModel';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Route, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,12 @@ import { Route, Router } from '@angular/router';
 export class UserService {
 
   constructor(private httpClient: HttpClient,
-    private router: Router) {
+    private router: Router,
+    private toastr: ToastrService) {
+    this.neededToken = localStorage.getItem('token');
     this.headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.neededToken
     });
-    this.neededToken = localStorage.getItem('token');
    }
 
   neededToken: any;
@@ -32,15 +34,21 @@ export class UserService {
     return this.httpClient.post(this.userURL, {UserName: user.username, Password: user.password, Email: user.email, Href: user.href}, {headers : this.headers, observe: 'response'}).pipe(map(map => map));
   }
 
+  registerAdmin(user : User) {
+    return this.httpClient.post(this.userURL + '/admin', {UserName: user.username, Password: user.password, Email: user.email}, {headers : this.headers, observe: 'response'}).pipe(map(map => map));
+  }
+
   loginUser(user : User){
     return this.httpClient.post(this.userURL + '/login', {Username: user.username, Password: user.password}, {headers : this.headers, observe: 'response'}).subscribe((value: any) => {
       localStorage.setItem('token', value.body.token);
       this.neededToken = localStorage.getItem('token');
       localStorage.setItem('username', user.username);
       this.router.navigate(['after']);
+      this.toastr.success('Successfully logged in!');
     },
     err => {
       if(err.status == 401) {
+        this.toastr.error("Sorry but this account is not existing!");
       }
     })
   }  
@@ -48,6 +56,18 @@ export class UserService {
   getRequests() {
     return this.httpClient.get(this.requestURL, {headers: this.headers}).pipe(map(map => map));
   }
+
+  getAllUsers() {
+    return this.httpClient.get(this.userURL, {headers: this.headers}).pipe(map(map => map));
+  }
+
+  displayNextRequests(nextLink : any) {
+    return this.httpClient.get(nextLink, {headers : this.headers}).pipe(map(map => map));
+   }
+
+   displayPreviousRequests(prevLink : any) {
+     return this.httpClient.get(prevLink, {headers : this.headers}).pipe(map(map => map));
+   }
 
   roleMatch(rolee): boolean {
     if(this.neededToken == null)

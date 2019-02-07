@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Track } from '../models/trackModel';
 import { Observable } from 'rxjs';
+import { Artist } from '../models/artistModel';
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,9 @@ export class TrackServiceService {
   getTrackByName(trackName: string) {
     var queryParam = '?searchQuery=' + trackName
     return this.httpClient.get(this.trackURL + queryParam, {headers : this.headers}).pipe(map(map => map));
+  }
+
+  insertArtistToTrack(id: number, artist: Artist) {
+    return this.httpClient.patch(this.trackURL + '/' + id + '/artist', {Name: artist.name, ImgUri: artist.imgUri}, {headers: this.headers}).pipe(map(map => map));
   }
 }

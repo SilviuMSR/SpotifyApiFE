@@ -6,6 +6,8 @@ import { Track } from '../models/trackModel';
 import { HttpHeaders } from '@angular/common/http';
 import { TrackServiceService } from '../servicies/track-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Artist } from '../models/artistModel';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -21,13 +23,18 @@ export class TrackDescriptionComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private trackService : TrackServiceService,
     private sanitization:DomSanitizer,
-    private apiService : ApiService) { }
+    private apiService : ApiService,
+    private toastr: ToastrService) { }
 
     id : number;
     track : Track;
     backgroundStyle : any;
     audio : any;
     isPlayed : boolean = true;
+
+    artistToAdd: Artist;
+    artistname: string;
+    artisturi: string;
 
     ngOnInit() {
       this.activatedRoute.params.subscribe( params => {
@@ -63,6 +70,16 @@ export class TrackDescriptionComponent implements OnInit {
       this.audio.pause();
       this.audio.currentTime = 0;
       this.isPlayed = false;
+    }
+
+    createArtistToTrack() {
+      this.artistToAdd = {
+        name: this.artistname,
+        imgUri: this.artisturi
+      };
+      this.trackService.insertArtistToTrack(this.id, this.artistToAdd).subscribe((value: any) => {
+        if(value != null) this.toastr.success("Artist added successfully!");
+      });
     }
 
 

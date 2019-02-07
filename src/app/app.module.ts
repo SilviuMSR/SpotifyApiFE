@@ -29,6 +29,8 @@ import * as _ from 'underscore';
 import { ProfileComponent } from './profile/profile.component';
 import { ToastrModule } from 'ngx-toastr';
 import { HasRoleDirective } from './directive/has-role.directive';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -51,11 +53,13 @@ import { HasRoleDirective } from './directive/has-role.directive';
     AlltracksComponent,
     AllartistsComponent,
     ProfileComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    AdminComponent
   ],
   imports: [
     RouterModule.forRoot(ROUTES),
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     AngularFontAwesomeModule,

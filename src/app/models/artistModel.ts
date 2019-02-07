@@ -1,7 +1,7 @@
 export class Artist {
-    artistId: string;
-    playlistArtistId: number;
+    artistId?: string;
+    playlistArtistId?: number;
     name: string;
-    uri: string;
+    uri?: string;
     imgUri: string;
 }

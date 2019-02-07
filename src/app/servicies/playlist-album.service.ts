@@ -39,7 +39,7 @@ export class PlaylistAlbumService {
 
     var queryParams = '?pageNumber=' + this.defaultStartPage + '&pageSize=' + this.defaultPageSize;
 
-    return this.httpClient.get(this.playlistAlbumURL + queryParams, {headers: this.headers}).pipe(map(map => map));
+    return this.httpClient.get(this.playlistAlbumURL, {headers: this.headers}).pipe(map(map => map));
    }
 
    getAlbumContent(albumId : number) : Observable<Album> {

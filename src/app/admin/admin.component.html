@@ -1,0 +1,145 @@
+<!--<button (click)="this.requests = !this.requests;">GET REQUESTS</button>
+<div *ngIf="this.requests" class="req">
+  <h3>Get all requests</h3>
+</div>
+
+<button (click)="this.users = !this.users;">GET ACCOUNTS</button>
+<div *ngIf="this.users" class="user">
+  <h3>Get all requests</h3>
+</div>
+
+<button (click)="this.add = !this.add;">CREATE ADMIN</button>
+<div *ngIf="this.add" class="add">
+  <h3>Add admin</h3>
+</div>
+-->
+
+<header>
+  <div class="main">
+    <div class="logo">
+      <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
+    </div>
+    <ul>
+      <li class="active"><a href="/profile">Profile</a></li>
+      <li><a href="/after">Home</a></li>
+    </ul>
+  </div>
+
+    <div class="row">
+
+      <div class="column">
+        <button class="btn default" (click)="this.requests = !this.requests; getAllRequests();">GET REQUESTS</button>
+        <div *ngIf="this.requests" class="req" style="margin-top:20px;">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Destination</th>
+                        <th>Methond</th>
+                        <th>Source</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let request of allRequests">
+                        <td style="color:white">{{request.destination}}</td>
+                        <td style="color:white">{{request.method}}</td>
+                        <td style="color:white">{{request.source}}</td>
+                        <td><button (click)="this.useragent = !this.useragent; getUserAgentData(request);">></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button (click)="displayNextRequests()">Next</button>
+            <button (click)="displayPreviousRequests()">Prev</button>
+        </div>
+      </div>
+
+      <div class="column">
+        <button class="btn default" (click)="this.users = !this.users;">GET ACCOUNTS</button>
+        <div *ngIf="this.users" class="user" style="margin-top:20px;">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of allUsers">
+                        <td style="color:white">{{user.username}}</td>
+                        <td style="color:white">{{user.email}}</td>
+                        <td style="color:white">{{user.role}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+      </div>
+
+      <div class="column">
+        <button class="btn default" (click)="this.add = !this.add;">CREATE ADMIN</button>
+        <div *ngIf="this.add" class="add">
+            <div class="newadmin" *appHasRole="['Admin']">
+                <h4>Insert album</h4>
+                <div class="insertadmin">
+                    <div class="forms">
+                        <form>
+                            <label for="aname"><b>Admin name</b></label>
+                            <input type="text" [(ngModel)]="adminname" id="adminname" placeholder="Enter adminname" name="adminname" required>
+      
+                            <label for="aemail"><b>Admin email</b></label>
+                            <input type="text" [(ngModel)]="adminemail" id="adminemail" placeholder="Enter adminemail" name="adminemail" required>
+      
+                            <label for="apassword"><b>Admin password</b></label>
+                            <input type="password" [(ngModel)]="adminpassword" id="adminpassword" placeholder="Enter adminpassword" name="adminpassword" required>
+                            <input type="submit" (click)="createAdmin()" value="SUBMIT">
+                        </form>
+                      </div>
+                </div>
+                </div>
+        </div>
+      </div>
+
+    <div class="column">
+      <button class="btn default" (click)="this.albums = !this.albums;">CREATE ALBUM</button>
+      <div *ngIf="this.albums" class="album">
+          <div class="create" *appHasRole="['Admin']">
+          <h4>Insert album</h4>
+          <div class="insertalbum">
+              <div class="forms">
+                  <form>
+                      <label for="aname"><b>Album name</b></label>
+                      <input type="text" [(ngModel)]="albumname" id="albumname" placeholder="Enter albumname" name="albumname" required>
+
+                      <label for="atype"><b>Album type</b></label>
+                      <input type="text" [(ngModel)]="albumtype" id="albumtype" placeholder="Enter albumtype" name="albumtype" required>
+
+                      <label for="auri"><b>Album Image</b></label>
+                      <input type="text" [(ngModel)]="albumuri" id="albumuri" placeholder="Enter albumuri" name="albumuri" required>
+                      <input type="submit" (click)="insertAlbum()" value="SUBMIT">
+                  </form>
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <div style="margin-top:200px;" class="uagent" *ngIf="this.useragent">
+            <table class="table table-hover" style="width:25%;">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Software</th>
+                            <th>Operating System</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{this.request.description}}</td>
+                            <td>{{this.request.software}}</td>
+                            <td>{{this.request.system}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+    </div>
+</header>
