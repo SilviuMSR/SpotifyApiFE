@@ -1,95 +1,3 @@
-/*.sidebar {
-  float: left;
-  width: 20%;
-  padding: 10px;
-  height: 100%;
-  height: 100vh;
-}
-
-.sidebar h2 {
-  text-align: center;
-}
-
-.sidebar a {
-  display:block;
-  padding: 10px;
-  text-align: center;
-  font-size: 25px;
-  text-decoration: none;
-  color: #818181;
-}
-
-.sidebar a:hover{
-  color: white;
-}
-
-.informations {
-  float: left;
-  width: 80%;
-  padding: 10px;
-  padding-left: 0;
-  padding-top: 0;
-  height: 100%;
-  height: 100vh;
-}
-
-.informations h3 {
-  margin-top: 0;
-  float: left;
-}
-
-.informations .jumbotron {
-  height: 95%;
-  text-align: center;
-  background-color:white;
-}
-
-.informations .head input[type=text] {
-  float:right;
-  border: 1px solid black;
-  font-size: 17px;
-}
-
-#searchbutton {
-  float: right;
-  margin-right: -180px;
-  margin-top:7px;
-  cursor: pointer;
-  color: #7B7B7B;
-}
-
-
-
-.album {
-  height: 33.3%;
-}
-
-
-.artist {
-  height: 33.3%;
-}
-
-.track {
-  height: 33.3%;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-app-albums {
-  padding: 20px;
-}
-
-app-tracks {
-  padding: 20px;
-}
-
-app-artists {
-  padding: 20px;
-}*/
 
 * {
   margin: 0px;
@@ -102,6 +10,7 @@ header {
   height: 100vh;
   background-size: cover;
   background-position: center;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
 }
 
 ul {
@@ -144,7 +53,7 @@ ul li.active a {
   margin: auto;
 }
 
-.title {
+/*.title {
   position: absolute;
   top: 45%;
   left: 50%;
@@ -155,14 +64,77 @@ ul li.active a {
   color: #fff;
   font-size: 70px;
   text-align: center;
+}*/
+
+.text-box {
+  position: absolute;
+  top:40%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.heading-primary {
+  color: white;
+  text-transform: uppercase;
+  backface-visibility: hidden; /* Backpart of transformed element is visible or not */
+}
+
+.heading-primary-main {
+  display: block;
+  font-size: 64px;
+  font-weight: 400;
+  text-align: center;
+  letter-spacing: 35px;
+
+  animation-name: moveInLeft;
+  animation-duration: 2s;
+}
+
+.heading-primary-sub {
+  display:block;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: 15px;
+  margin-top:10px;
+  text-align: center;
+
+  animation-name: moveInRight;
+  animation-duration: 2s;
+}
+
+@keyframes moveInLeft {
+  /* When animation start */
+  0% {
+    opacity: 0; /* To be invisible */
+    transform: translateX(-100px); /* Animate in x direction -> */
+
+  }
+
+  /* When animation ends */
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+
+@keyframes moveInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }  
+
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
 }
 
 .button {
   align-content: center;
   display:inline-block;
   position: absolute;
-  top: 70%;
-  left: 50%;
+  top: 60%;
+  left: 49%;
   transform: translate(-50%,-50%);
 }
 
@@ -173,6 +145,8 @@ ul li.active a {
   color: #fff;
   transition: 0.6s ease;
   margin-left:15px;
+  animation-name: moveFromBottom;
+  animation-duration: 2s;
 }
 
 .btn:hover {
@@ -190,5 +164,17 @@ ul li.active a {
   .button{
     width:620px;
     left: 75%;
+  }
+}
+
+@keyframes moveFromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

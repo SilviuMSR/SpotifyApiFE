@@ -48,8 +48,7 @@ export class AlbumDescriptionComponent implements OnInit {
   trackname: string;
   trackpreview: string;
   trackhref: string;
-  trackToAdd: Track;
- 
+  trackToAdd: Track; 
 
   ngOnInit() {
     this.tracks = [];
@@ -57,7 +56,6 @@ export class AlbumDescriptionComponent implements OnInit {
       this.id = params['id']
     });
     this.getContent();
-    
     this.audio = new Audio();
 
     this.setClickedRow = function(index){

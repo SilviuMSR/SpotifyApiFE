@@ -52,8 +52,8 @@ export class AdminComponent implements OnInit {
 
     this.albumService.insertAlbum(this.album).subscribe((value: any) => {
       if(value != null) {
+        console.log(value);
         this.toastr.success("Album created successfully");
-        location.reload();
       }
       else {
         this.toastr.error("We can't create this album!");
@@ -101,6 +101,7 @@ export class AdminComponent implements OnInit {
   getUsers() {
     this.userService.getAllUsers().subscribe((value: any) => {
       this.allUsers = value.values;
+      console.log(this.allUsers);
       this.allUsersLinks = value.links;
     })
   }

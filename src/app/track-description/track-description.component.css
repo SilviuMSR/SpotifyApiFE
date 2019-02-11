@@ -26,6 +26,8 @@
     height: 50%;
     padding: 10px;
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    animation-name: moveInRight;
+    animation-duration: 2s;
   }
   
   .create h4 {
@@ -68,4 +70,16 @@
   input[type=submit]:hover {
   background-color: #fff;
   color: #000;
+  }
+
+  @keyframes moveInRight {
+    0% {
+      opacity: 0;
+      transform: translateX(150px);
+    }
+  
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }

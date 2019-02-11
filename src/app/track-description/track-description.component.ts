@@ -36,12 +36,22 @@ export class TrackDescriptionComponent implements OnInit {
     artistname: string;
     artisturi: string;
 
+    loaded: boolean = false;
+
     ngOnInit() {
       this.activatedRoute.params.subscribe( params => {
         this.id = params['id']
       });
       this.getContent(this.id);
+      this.waitFunction();
+
       this.audio = new Audio();
+    }
+
+    waitFunction() {
+      setTimeout(()=>{ 
+        this.loaded = true;
+      }, 1000);
     }
 
     getContent(id : number)

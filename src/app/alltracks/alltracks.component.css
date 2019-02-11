@@ -130,3 +130,28 @@ border-radius:20px;
 .search-container button:hover {
 background: #ccc;
 }
+
+@media screen and (max-width: 620px) {
+  header {
+    width: 620px;
+  }
+  
+  .search-container {
+    top: 10%;
+    left:30%;
+  }
+
+  header h2 {
+    left:20%;
+    top:25%;
+  }
+
+  .row h2 {
+    padding: 20px;
+  }
+
+  img {
+    position: absolute;
+    left: -9999%;
+  }
+}

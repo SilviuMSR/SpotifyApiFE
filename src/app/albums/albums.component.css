@@ -3,6 +3,21 @@ img {
     border-radius: 8px;
     box-shadow: 3px 3px;
     transition: transform 0.6s;
+    
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+}
+
+@keyframes moveInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 img:hover {

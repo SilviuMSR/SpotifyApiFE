@@ -1,7 +1,7 @@
 <header [style.background-image]="backgroundStyle">
     <div class="main">
         <div class="logo">
-            <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
+            <img src="../../assets/images/2611318f-d326-4f5c-9a16-c705a5dfdacc.png" alt="">
         </div>
         <ul>
             <li><a href="/albumdescription/{{this.id}}">OVERVIEW</a></li>
@@ -62,7 +62,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let track of tracks | slice:0:5; let i = index" [class.active]="i == selectedRow">
+                <tr *ngFor="let track of tracks | slice:0:5; let i=index; let even=even" [class.active]="i == selectedRow">
                     <td style="color:white;">{{i}}</td>
                     <td (click)="setClickedRow(i)"> 
                         <button (click)="isPlayed == true ? stopTrack(track) : playTrack(track)" class='button'></button>

@@ -43,13 +43,16 @@ export class ArtistdescriptionComponent implements OnInit {
       this.id = params['id'];
     });
     this.audio = new Audio();
+
     this.getContent();
+
     this.setClickedRow = function(index){
       if(this.selectedRow == null)
         this.selectedRow = index;
       else this.selectedRow = null;
     }
   }
+
 
   getContent()
   {

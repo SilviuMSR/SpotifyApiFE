@@ -132,3 +132,28 @@ input[type=text] {
 .search-container button:hover {
   background: #ccc;
 }
+
+@media screen and (max-width: 620px) {
+  header {
+    width: 620px;
+  }
+  
+  .search-container {
+    top: 5%;
+    left:40%;
+  }
+
+  header h2 {
+    left:20%;
+    top:25%;
+  }
+
+  .imag h2 {
+    padding: 20px;
+  }
+
+  .imag img {
+    position: absolute;
+    left: -9999%;
+  }
+}

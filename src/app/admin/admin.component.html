@@ -17,7 +17,7 @@
 <header>
   <div class="main">
     <div class="logo">
-      <img src="../../assets/images/39bec40e-25eb-4a68-b06d-9c8a080c0230.png" alt="">
+      <img src="../../assets/images/2611318f-d326-4f5c-9a16-c705a5dfdacc.png" alt="">
     </div>
     <ul>
       <li class="active"><a href="/profile">Profile</a></li>
@@ -28,7 +28,7 @@
     <div class="row">
 
       <div class="column">
-        <button class="btn default" (click)="this.requests = !this.requests; getAllRequests();">GET REQUESTS</button>
+        <a class="btn btn-white" (click)="this.requests = !this.requests; getAllRequests();">GET REQUESTS</a>
         <div *ngIf="this.requests" class="req" style="margin-top:20px;">
             <table class="table table-hover">
                 <thead>
@@ -44,31 +44,29 @@
                         <td style="color:white">{{request.destination}}</td>
                         <td style="color:white">{{request.method}}</td>
                         <td style="color:white">{{request.source}}</td>
-                        <td><button (click)="this.useragent = !this.useragent; getUserAgentData(request);">></button></td>
+                        <td><fa name="info-circle" (click)="this.useragent = !this.useragent; getUserAgentData(request);" style="color:black; font-size:20px;"></fa></td>
                     </tr>
                 </tbody>
             </table>
-            <button (click)="displayNextRequests()">Next</button>
-            <button (click)="displayPreviousRequests()">Prev</button>
+            <fa name="arrow-right" (click)="displayNextRequests()" style="color:black; font-size:25px;"></fa>
+            <fa name="arrow-left" (click)="displayPreviousRequests()" style="color:black; font-size:25px;"></fa>
         </div>
       </div>
 
       <div class="column">
-        <button class="btn default" (click)="this.users = !this.users;">GET ACCOUNTS</button>
+        <button class="btn btn-white" (click)="this.users = !this.users; getUsers()">GET ACCOUNTS</button>
         <div *ngIf="this.users" class="user" style="margin-top:20px;">
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Role</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let user of allUsers">
-                        <td style="color:white">{{user.username}}</td>
+                        <td style="color:white">{{user.userName}}</td>
                         <td style="color:white">{{user.email}}</td>
-                        <td style="color:white">{{user.role}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -76,7 +74,7 @@
       </div>
 
       <div class="column">
-        <button class="btn default" (click)="this.add = !this.add;">CREATE ADMIN</button>
+        <button class="btn btn-white" (click)="this.add = !this.add;">CREATE ADMIN</button>
         <div *ngIf="this.add" class="add">
             <div class="newadmin" *appHasRole="['Admin']">
                 <h4>Insert album</h4>
@@ -100,7 +98,7 @@
       </div>
 
     <div class="column">
-      <button class="btn default" (click)="this.albums = !this.albums;">CREATE ALBUM</button>
+      <button class="btn btn-white" (click)="this.albums = !this.albums;">CREATE ALBUM</button>
       <div *ngIf="this.albums" class="album">
           <div class="create" *appHasRole="['Admin']">
           <h4>Insert album</h4>

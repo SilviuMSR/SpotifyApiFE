@@ -37,9 +37,9 @@ export class PlaylistartistService {
 
    displayPlaylistArtist() {
 
-    var queryParams = '?pageNumber=' + this.defaultStartPage + '&pageSize=' + this.defaultPageSize;
+    var queryParams = '?username=' + localStorage.getItem('username') + '&pageNumber=' + this.defaultStartPage + '&pageSize=' + this.defaultPageSize;
 
-    return this.httpClient.get(this.playlistArtistURL, {headers: this.headers}).pipe(map(map => map));
+    return this.httpClient.get(this.playlistArtistURL + queryParams, {headers: this.headers}).pipe(map(map => map));
    }
 
    getArtistContent(artistId : number) : Observable<Artist> {
@@ -60,7 +60,7 @@ export class PlaylistartistService {
 
    insertArtistToPlaylist(artistId : string) {
     return this.httpClient.get(this.artistURL + '/' + artistId, {headers : this.headers}).subscribe((value : any) => {
-      this.httpClient.post(this.playlistArtistURL, {Name : value.name,  ImgUri : value.imgUri}, {headers : this.headers}).subscribe((value : any) => {
+      this.httpClient.post(this.playlistArtistURL, {Name : value.name, UserName: localStorage.getItem('username'),  ImgUri : value.imgUri}, {headers : this.headers}).subscribe((value : any) => {
       })});
    }
 

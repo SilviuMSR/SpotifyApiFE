@@ -114,47 +114,56 @@
 
   .album {
     position: absolute;
-    top: 25%;
+    top: 15%;
     left: 70%;
     width: 45%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
   }
 
   .track {
     position: absolute;
-    top: 55%;
+    top: 45%;
     left: 70%;
     width: 45%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
+    backface-visibility: hidden;
   }
 
   .artist {
     position: absolute;
-    top: 85%;
+    top: 75%;
     left: 70%;
     width: 45%;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%);
+    transform: translate(-50%);
   }
 
   .album h3 {
     text-align: center;
     color: white;
     padding: 20px;
-  }
+  
+    animation-name: moveInLeft;
+    animation-duration: 2.5s;
+}
 
   .artist h3 {
     text-align: center;
     color: white;
     padding: 20px;
+
+    animation-name: moveInLeft;
+    animation-duration: 2.5s;
   }
 
   .track h3 {
     text-align: center;
     color: white;
     padding: 20px;
+    animation-name: moveInLeft;
+    animation-duration: 2.5s;
   }
 
   #arrow {
@@ -199,4 +208,43 @@
     width: 620px;
   }
 
+  .tops {
+    visibility: hidden;
+  }
+
+  .playlist {
+    width:100%;
+  }
+
+  .insideplaylist {
+    height: 70%;
+    height: 70vh;
+    width: 60%;
+    left: 20%;
+    top: 20%;
+  }
+
+  .insideplaylist ul {
+    margin-top:2px;
+  }
+
+  ul {
+    margin-top: -30px;
+  }
+
+  a.welcome {
+    margin-left:-20px;
+  }
+}
+
+@keyframes moveInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
