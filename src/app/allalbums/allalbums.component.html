@@ -12,7 +12,8 @@
       </div>
     <div>
     <h2>Current available albums</h2>
-
+    
+    <!-- Search albums part -->
     <div class="search-container">
         <form>
           <input type="text" [(ngModel)]="albumName" placeholder="Insert album name..." name="search">
@@ -22,19 +23,21 @@
 
     <div class="row" style="position:absolute; top:35%;">
         <div class="imag" *ngFor="let album of this.allAlbums" style="padding-left:50px;">
-            <!--<button (click)="insertAlbumToPlaylist(album)">Add</button>-->
             <h2 style="position: relative; font-size:20px; top:-10%; left: 5%;">{{album.name}}</h2>
             <img src={{album.imgUri}} alt="" width="250" height="250" (click)="getAlbumContent(album)">
             
         </div>
     </div>
 </div>
-<div class="numbers" style="cursor:pointer; display:flex; position:absolute; left:40%; top:80%; color:white; font-size:30px;">
-        <div *ngFor="let index of this.pages">
-            <ul >
-                <li (click)="GetAlbums(index)">{{index}}</li>
+
+<!-- Paging part -->
+<div class="numbers" style="cursor:pointer; display:flex; position:absolute; left:40%; top:80%; translate: transform(-50%,-50%);color:white; font-size:30px;">
+        <div *ngFor="let i of this.pages; let i=index">
+            <ul>
+                <li (click)="GetAlbums(i)">{{i}}</li>
             </ul>
         </div>
     </div>  
+    <h5 style="position: absolute; left:50%; top: 90%; transform: translate(-50%, -50%); color:white;">Current page {{this.currentPage}}</h5>
 </header>
 

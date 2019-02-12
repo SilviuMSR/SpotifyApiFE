@@ -18,6 +18,8 @@ export class AllartistsComponent implements OnInit {
   pages : number[] = [];
   artistName: any;
 
+  currentPage: number;
+
   ngOnInit() {
     this.getAllArtists();
   }
@@ -38,6 +40,7 @@ export class AllartistsComponent implements OnInit {
     this.artistService.getArtistByPage(pageNumber).subscribe((value : any) => {
       this.allArtists = value.values;
       this.artistLinks = value.links;
+      this.currentPage = pageNumber;
     })
   }
 

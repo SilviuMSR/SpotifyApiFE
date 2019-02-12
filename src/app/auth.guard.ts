@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LoginService } from './servicies/login.service';
 import { UserService } from './servicies/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,8 @@ import { UserService } from './servicies/user.service';
 export class AuthGuard implements CanActivate {
 
   constructor(private userService: UserService,
-              private router: Router) {}
+              private router: Router,
+              private toastr: ToastrService) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -24,6 +25,8 @@ export class AuthGuard implements CanActivate {
         }
         else 
         {
+          this.toastr.error("Only admins can access this section!");
+          localStorage.clear();
           this.router.navigate(['login']);
           return false;
         }

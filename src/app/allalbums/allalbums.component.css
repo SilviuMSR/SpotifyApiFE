@@ -133,6 +133,10 @@ input[type=text] {
   background: #ccc;
 }
 
+div.active li {
+  color:Red;
+}
+
 @media screen and (max-width: 620px) {
   header {
     width: 620px;

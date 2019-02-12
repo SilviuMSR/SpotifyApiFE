@@ -63,11 +63,11 @@ export class ProfileComponent implements OnInit {
 
     this.albumService.insertAlbum(this.album).subscribe((value: any) => {
       if(value != null) {
-        alert("Inserted");
+        this.toastr.success("Successfully added!");
         location.reload();
       }
       else {
-        alert("Album not inserted");
+        this.toastr.error("Failed to add this album");
       }
     })
   }

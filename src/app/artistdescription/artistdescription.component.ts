@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../servicies/api.service';
 import { Artist } from '../models/artistModel';
 import { Track } from '../models/trackModel';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -23,7 +22,6 @@ export class ArtistdescriptionComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private artistService : ArtistServiceService,
     private trackService : TrackServiceService,
-    private apiService : ApiService,
     private playlistTrackService : PlaylistTrackService,
     private playlistArtistService : PlaylistartistService,
     private sanitization:DomSanitizer,
@@ -56,14 +54,6 @@ export class ArtistdescriptionComponent implements OnInit {
 
   getContent()
   {
-    /*this.apiService.get('/artist/' + id).subscribe((value : any) => {
-      this.artist = value;
-      this.apiService.get('/track/byArtist/' + id).subscribe((t : any) => {
-        this.tracks = t;
-        this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.artist.imgUri})`)
-        console.log(this.tracks)
-      })
-    })*/
     this.artistService.getArtist(this.id).subscribe((value : any) => {
       this.artist = value;
       this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.artist.imgUri})`)
@@ -74,9 +64,15 @@ export class ArtistdescriptionComponent implements OnInit {
   }
   
   addToPlaylist(track: Track) {
-    //this.apiService.post('/playlistTrack', {Name: track.name, PreviewUrl: track.previewUrl, Href:track.href}).subscribe();
-    this.playlistTrackService.insertTrackToPlaylist(track).subscribe();
-    this.toastrService.success("Successfully added to playlist!");
+    this.playlistTrackService.insertTrackToPlaylist(track).subscribe((value: any) => {
+      console.log(value);
+      this.toastrService.success("Successfully added to playlist!");
+    },
+    err => {
+      if(err) {
+        this.toastrService.error("This track already exist in your playlist!");
+      }
+    });
   }
 
   playTrack(track: Track)
@@ -95,9 +91,7 @@ export class ArtistdescriptionComponent implements OnInit {
 
   insertArtistToPlaylist(artist : Artist)
   {
-    //this.srv.insertAlbumToPlaylist(album.albumId);
     this.playlistArtistService.insertArtistToPlaylist(artist.artistId);
-    this.toastrService.success("Successfully added to playlist!");
   }
 
 

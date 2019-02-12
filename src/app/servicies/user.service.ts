@@ -61,12 +61,20 @@ export class UserService {
     return this.httpClient.get(this.userURL, {headers: this.headers}).pipe(map(map => map));
   }
 
+  displayNextUsers(nextLink: any) {
+    return this.httpClient.get(nextLink, {headers : this.headers}).pipe(map(map => map));
+  }
+
+  displayPreviousUsers(previousLink: any) {
+    return this.httpClient.get(previousLink, {headers : this.headers}).pipe(map(map => map));
+  }
+
   displayNextRequests(nextLink : any) {
     return this.httpClient.get(nextLink, {headers : this.headers}).pipe(map(map => map));
    }
 
    displayPreviousRequests(prevLink : any) {
-     return this.httpClient.get(prevLink, {headers : this.headers}).pipe(map(map => map));
+    return this.httpClient.get(prevLink, {headers : this.headers}).pipe(map(map => map));
    }
 
   roleMatch(rolee): boolean {
@@ -77,7 +85,6 @@ export class UserService {
     let isMatch = false;
     this.decodedToken = this.jwtHelper.decodeToken(this.neededToken)
     const userRole = this.decodedToken.role as Array<string>;
-    
     rolee.forEach(element => {
       if(userRole.includes(element)) {
         isMatch = true;

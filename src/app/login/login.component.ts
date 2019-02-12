@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyServiceService } from '../servicies/spotify-service.service';
-import { LoginService } from '../servicies/login.service';
-import { Router } from '@angular/router';
 import { UserService } from '../servicies/user.service';
 import { User } from '../models/userModel';
-import { HttpHeaderResponse, HttpResponse, HttpErrorResponse } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-login',
@@ -20,11 +14,8 @@ export class LoginComponent implements OnInit {
   user: User;
 
   constructor(
-    private userService: UserService,
-    private router: Router,
-    private toastrService: ToastrService) {
-
-     }
+    private userService: UserService) {
+  }
   
   ngOnInit() {
     
@@ -39,18 +30,5 @@ export class LoginComponent implements OnInit {
     };
 
     this.userService.loginUser(this.user);
-
-    /*this.userService.loginUser(this.user).subscribe((value : any) => {
-      localStorage.setItem('token', value.body.token);
-      this.user.token = value.body.token;
-      localStorage.setItem('username', this.username);
-      this.router.navigate(['after']);
-    },
-    err => {
-      if(err.status == 401) {
-        this.toastrService.error("Sorry, this account is not existing!");
-      }
-    });*/
   }
-
 }

@@ -84,7 +84,7 @@ export class AdminComponent implements OnInit {
     })
   }
 
-  createAdmin(user: User) {
+  createAdmin() {
 
     this.admin = {
       username: this.adminname,
@@ -101,7 +101,20 @@ export class AdminComponent implements OnInit {
   getUsers() {
     this.userService.getAllUsers().subscribe((value: any) => {
       this.allUsers = value.values;
-      console.log(this.allUsers);
+      this.allUsersLinks = value.links;
+    })
+  }
+
+  displayNextUsers() {
+    this.userService.displayNextUsers(this.allUsersLinks.nextPageLink).subscribe((value : any) => {
+      this.allUsers = value.values;
+      this.allUsersLinks = value.links;
+    })
+  }
+
+  displayPreviousUsers() {
+    this.userService.displayPreviousUsers(this.allUsersLinks.previousPageLink).subscribe((value : any) => {
+      this.allUsers = value.values;
       this.allUsersLinks = value.links;
     })
   }
@@ -113,7 +126,6 @@ export class AdminComponent implements OnInit {
       software: request.userAgent.software,
       system: request.userAgent.operatingSystem
     }
-    console.log(this.request);
   }
 
 }

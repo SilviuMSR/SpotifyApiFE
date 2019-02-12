@@ -53,7 +53,6 @@ export class PlaylistTrackService {
    }
 
    insertTrackToPlaylist(track : Track) {
-
     return this.httpClient.post(this.playlistTrackURL, {Name: track.name, UserName: localStorage.getItem('username'), PreviewUrl: track.previewUrl, Href:track.href}, {headers : this.headers}).pipe(map(map => map));
    }
 

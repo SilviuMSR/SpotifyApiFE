@@ -4,14 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 // import the routes
 import { ROUTES } from './routes';
 import { HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { ArtistPlaylistComponent } from './artist-playlist/artist-playlist.component';
-import { SongDescriptionComponent } from './song-description/song-description.component';
 import { LoginComponent } from './login/login.component';
 import { RegComponent } from './reg/reg.component';
 import { AlbumsComponent } from './albums/albums.component';
@@ -31,15 +28,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { HasRoleDirective } from './directive/has-role.directive';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     NotFoundComponent,
-    ArtistPlaylistComponent,
-    SongDescriptionComponent,
+    HomeComponent,
     LoginComponent,
     RegComponent,
     AlbumsComponent,

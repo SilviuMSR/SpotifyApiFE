@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class AlltracksComponent implements OnInit {
 
-  constructor(private apiService: ApiService,
+  constructor(
     private trackService: TrackServiceService,
     private route : Router) { }
 
@@ -21,14 +21,13 @@ export class AlltracksComponent implements OnInit {
   pages : number[] = [];
   trackName: any;
 
+  currentPage: Number;
+
   ngOnInit() {
     this.getAllTracks();
   }
 
   getAllTracks() {
-    /*this.apiService.get('/track').subscribe((value : any) => {
-      this.allTracks = value;
-    })*/
     this.trackService.getTopTracks().subscribe((value : any) => {
       this.allTracks = value.values;
       this.trackLinks = value.links;
@@ -46,6 +45,7 @@ export class AlltracksComponent implements OnInit {
     this.trackService.getTrackByPage(pageNumber).subscribe((value : any) => {
       this.allTracks = value.values;
       this.trackLinks = value.links;
+      this.currentPage = pageNumber;
     })
   }
 

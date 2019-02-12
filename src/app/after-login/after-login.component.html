@@ -21,9 +21,12 @@
             <li (click)="setArtistOption(); displayPlaylistArtists();">My Artists</li>
         </ul>
 
+        <!-- Playlist section -->
         <div class="content" *ngIf="!albumOption && !trackOption && !artistOption">
           <h3 style="color:white; text-align: center; margin-top:150px;">Welcome!<br><br>This is your playlist.<br><br>Please choose what you want to see from it.</h3>
         </div>
+
+        <!-- Albums section from playlist -->
         <div class="content" *ngIf="albumOption == true">
           <div class="a" style="margin-top:20px;" *ngFor="let album of playlistAlbums">
             <img src="{{album.imgUri}}" alt="" height="35" width="35" (click)="generateAlbumContent(album)">
@@ -32,11 +35,12 @@
             <fa name="chevron-circle-right" (click)="generateAlbumContent(album)" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
           </div>
           <ul>
-           <li (click)="displayPreviousAlbums()" style="position:absolute;">Previous</li>
-           <li (click)="displayNextAlbums()" style="position: absolute; right:10%;">Next</li>
+            <li class="previousBtn" (click)="displayPreviousAlbums()">Previous</li>
+            <li class="nextBtn" (click)="displayNextAlbums()">Next</li>
           </ul>
         </div>
 
+        <!-- Track section from playlist -->
         <div class="content" *ngIf="trackOption == true">
           <div class="t" style="margin-top:20px;" *ngFor="let track of playlistTracks">
             <img src="{{track.href}}" alt="" height="35" width="35" (click)="generateTrackContent(track)">
@@ -45,11 +49,12 @@
             <fa name="play" *ngIf="isPlayed==false" (click)="generateTrackContent(track)" style="color:black; font-size:25px; position: absolute; left:80%;"></fa>
           </div>
           <ul>
-            <li (click)="displayPreviousTracks()" style="position:absolute;">Previous</li>
-            <li (click)="displayNextTracks()" style="position: absolute; right:10%;">Next</li>
+            <li class="previousBtn" (click)="displayPreviousTracks()">Previous</li>
+            <li class="nextBtn" (click)="displayNextTracks()">Next</li>
           </ul>
         </div>
 
+        <!-- Artist section from playlist -->
         <div class="content" *ngIf="artistOption == true">
           <div class="a" style="margin-top:20px;" *ngFor="let artist of playlistArtists">
             <img src="{{artist.imgUri}}" alt="" height="35" width="35" (click)="generateArtistContent(artist)">
@@ -58,17 +63,17 @@
             <fa name="chevron-circle-right" style="color:black; font-size:25px; position: absolute; left:80%;" (click)="generateArtistContent(artist)"></fa>
           </div>
           <ul>
-            <li (click)="displayPreviousArtists()" style="position:absolute;">Previous</li>
-            <li (click)="displayNextArtists()" style="position: absolute; right:10%;">Next</li>
+            <li class="previousBtn" (click)="displayPreviousArtists()">Previous</li>
+            <li class="nextBtn" (click)="displayNextArtists()">Next</li>
           </ul>
         </div>
 
         <footer>
         </footer>
       </div>
-
-
     </div>
+
+    <!-- Top albums, artists, tracks -->
     <div class="tops">
       <div class="album">
         <h3>Top Albums</h3>

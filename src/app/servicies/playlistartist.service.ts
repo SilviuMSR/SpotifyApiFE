@@ -3,6 +3,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Artist } from '../models/artistModel';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class PlaylistartistService {
   defaultStartPage = 1;
   defaultPageSize = 5;
 
-  constructor(private httpClient : HttpClient) {
+  constructor(private httpClient : HttpClient,
+    private toastr: ToastrService) {
     this.headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.neededToken
     });
@@ -61,6 +63,12 @@ export class PlaylistartistService {
    insertArtistToPlaylist(artistId : string) {
     return this.httpClient.get(this.artistURL + '/' + artistId, {headers : this.headers}).subscribe((value : any) => {
       this.httpClient.post(this.playlistArtistURL, {Name : value.name, UserName: localStorage.getItem('username'),  ImgUri : value.imgUri}, {headers : this.headers}).subscribe((value : any) => {
+        this.toastr.success("Successfully added to playlist!");
+      },
+      err => {
+        if(err) {
+          this.toastr.error("This artist already exist in your playlist!");
+        }
       })});
    }
 

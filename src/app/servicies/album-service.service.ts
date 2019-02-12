@@ -21,7 +21,6 @@ export class AlbumServiceService {
    }
 
    private albumURL = 'https://localhost:5001/api/album'
-   private trackURL = 'https://localhost:5001/api/track'
 
    album : Album;
 

@@ -10,6 +10,7 @@
         <li><a (click)="goToArtists();">Artists</a></li>
       </ul>
     </div>
+
   <div>
     <div class="search-container">
         <form>
@@ -17,17 +18,18 @@
             <button type="submit"><fa name="search" (click)="getArtistByName()"></fa></button>
         </form>
     </div>
+
   <h2>Current available artists</h2>
   <div class="row" style="position:absolute; top:35%;">
       <div *ngFor="let artist of this.allArtists" style="padding-left:50px;">
-          <!--<button (click)="insertAlbumToPlaylist(album)">Add</button>-->
           <h2 style="position: relative; font-size:20px; top:-10%; left: 5%;">{{artist.name}}</h2>
           <img src={{artist.imgUri}} alt="" width="250" height="250" (click)="getArtistContent(artist)">
           
       </div>
   </div>
 </div>
-<div class="numbers" style="cursor:pointer; display:flex; position:absolute; left:40%; top:80%; color:white; font-size:30px;">
+
+<div class="numbers" style="cursor:pointer; display:flex; position:absolute; left:40%; top:80%;translate: transform(-50%,-50%); color:white; font-size:30px;">
       <div *ngFor="let index of this.pages">
           <ul >
               <li (click)="GetArtists(index)">{{index}}</li>

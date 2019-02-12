@@ -1,6 +1,4 @@
-import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ArtistPlaylistComponent } from './artist-playlist/artist-playlist.component';
 import { AuthGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { RegComponent } from './reg/reg.component';
@@ -13,6 +11,7 @@ import { AllartistsComponent } from './allartists/allartists.component';
 import { AlltracksComponent } from './alltracks/alltracks.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
 
 export const ROUTES = [
     { path: '',  component: HomeComponent },

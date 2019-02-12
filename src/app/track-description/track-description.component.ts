@@ -1,9 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AlbumDescriptionComponent } from '../album-description/album-description.component';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '../servicies/api.service';
 import { Track } from '../models/trackModel';
-import { HttpHeaders } from '@angular/common/http';
 import { TrackServiceService } from '../servicies/track-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Artist } from '../models/artistModel';
@@ -23,7 +20,6 @@ export class TrackDescriptionComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private trackService : TrackServiceService,
     private sanitization:DomSanitizer,
-    private apiService : ApiService,
     private toastr: ToastrService) { }
 
     id : number;
@@ -56,14 +52,10 @@ export class TrackDescriptionComponent implements OnInit {
 
     getContent(id : number)
     {
-      /*this.apiService.get('/track/' + id).subscribe((value : any) => {
-        this.track = value;
-      })*/
       this.trackService.getTrackContent(id).subscribe((value : any) => {
         this.track = value;
         this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.track.href})`);
-        this.playTrack(this.track);
-        
+        this.playTrack(this.track); 
       })
 
     }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpHeaderResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Album } from '../models/album';
 import { map } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class PlaylistAlbumService {
   defaultStartPage = 1;
   defaultPageSize = 5;
 
-  constructor(private httpClient : HttpClient) {
+  constructor(private httpClient : HttpClient,
+    private toastr: ToastrService) {
     this.headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.neededToken
     });
@@ -60,8 +62,17 @@ export class PlaylistAlbumService {
 
    insertAlbumToPlaylist(albumId : number) {
     return this.httpClient.get(this.albumURL + '/' + albumId, {headers : this.headers}).subscribe((value : any) => {
-      this.httpClient.post(this.playlistAlbumURL, {Name : value.name, UserName: localStorage.getItem('username'), Type : value.type, ImgUri : value.imgUri}, {headers : this.headers}).subscribe((value : any) => {
-      })});
+      this.httpClient.post(this.playlistAlbumURL, {Name : value.name, UserName: localStorage.getItem('username'), Type : value.type, ImgUri : value.imgUri}, {headers : this.headers, observe: 'response'}).subscribe(
+        (value: any) => {
+          this.toastr.success("Successfully added to playlist!");
+        },
+        err => {
+          if(err) {
+            this.toastr.error("You already have this album in your playlist!");
+          }
+        }
+      )
+    });
    }
 
 }

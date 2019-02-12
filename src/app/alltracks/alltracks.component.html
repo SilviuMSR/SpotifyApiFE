@@ -22,14 +22,14 @@
   <h2>Current available tracks</h2>
   <div class="row" style="position:absolute; top:35%;">
       <div *ngFor="let track of this.allTracks" style="padding-left:50px;">
-          <!--<button (click)="insertAlbumToPlaylist(album)">Add</button>-->
           <h2 style="position: relative; font-size:20px; top:-10%; left: 5%;">{{track.name}}</h2>
           <img src={{track.href}} alt="" width="250" height="250" (click)="getTrackContent(track)">
           
       </div>
   </div>
 </div>
-<div class="numbers" style="cursor:pointer; display:flex; position:absolute; left:40%; top:80%; color:white; font-size:30px;">
+
+<div class="numbers" style="cursor:pointer; display:flex; position:absolute; left:45%; top:80%; translate: transform(-50%,-50%); color:white; font-size:30px;">
       <div *ngFor="let index of this.pages">
           <ul >
               <li (click)="GetTracks(index)">{{index}}</li>
