@@ -33,6 +33,7 @@ export class TrackDescriptionComponent implements OnInit {
     artisturi: string;
 
     loaded: boolean = false;
+    link: string;
 
     ngOnInit() {
       this.activatedRoute.params.subscribe( params => {
@@ -62,7 +63,12 @@ export class TrackDescriptionComponent implements OnInit {
 
     playTrack(track: Track)
     {
-      this.audio.src = track.previewUrl;
+      if(track.previewUrl.length < 30) {
+      this.audio.src = decodeURIComponent("../../assets/" + track.previewUrl + ".mp3");
+      }
+      else {
+        this.audio.src = track.previewUrl;
+      }
       this.audio.load();
       this.audio.play();
       this.isPlayed = true;

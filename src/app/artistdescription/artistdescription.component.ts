@@ -56,6 +56,7 @@ export class ArtistdescriptionComponent implements OnInit {
   {
     this.artistService.getArtist(this.id).subscribe((value : any) => {
       this.artist = value;
+      console.log(value);
       this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.artist.imgUri})`)
       this.trackService.getTopTracks().subscribe((val : any) => {
         this.tracks = val.values;

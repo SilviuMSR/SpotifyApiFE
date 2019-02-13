@@ -40,6 +40,9 @@ export class AlbumDescriptionComponent implements OnInit {
   trackhref: string;
   trackToAdd: Track; 
 
+  selectedRow : Number;
+  setClickedRow : Function;
+
   ngOnInit() {
     this.tracks = [];
     this.activatedRoute.params.subscribe( params => {
@@ -47,6 +50,12 @@ export class AlbumDescriptionComponent implements OnInit {
     });
     this.getContent();
     this.audio = new Audio();
+
+    this.setClickedRow = function(index){
+      if(this.selectedRow == null)
+        this.selectedRow = index;
+      else this.selectedRow = null;
+    }
   }
 
   getContent()
@@ -55,10 +64,16 @@ export class AlbumDescriptionComponent implements OnInit {
       if(value != null)
       {
         this.album = value;
+        console.log(this.album.tracks.length);
         this.backgroundStyle = this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${this.album.imgUri})`);
-        this.trackService.getTopTracks().subscribe((val : any) => {
-          this.tracks = val.values;
-         })
+        if(this.album.tracks.length == 0){
+          this.trackService.getTopTracks().subscribe((val : any) => {
+            this.tracks = val.values;
+          })
+        }
+        else {
+          this.tracks = value.tracks;
+        }
       }
       else {
         this.playlistAlbumService.getAlbumContent(this.id).subscribe((p: any) => {
@@ -75,10 +90,15 @@ export class AlbumDescriptionComponent implements OnInit {
 
   playTrack(track: Track)
   {
-    this.audio.src = track.previewUrl;
+    if(track.previewUrl.length < 30) {
+    this.audio.src = decodeURIComponent("../../assets/" + track.previewUrl + ".mp3");
+    }
+    else {
+      this.audio.src = track.previewUrl;
+    }
     this.audio.load();
     this.audio.play();
-    this.isPlayed = !this.isPlayed;
+    this.isPlayed = true;
   }
 
   stopTrack() {
@@ -109,6 +129,7 @@ export class AlbumDescriptionComponent implements OnInit {
       previewUrl: this.trackpreview
     };
     this.albumService.insertTrackToAlbum(this.id, this.trackToAdd).subscribe((value: any) => {
+      console.log(value);
       if(value != null) this.toastrService.success("Track added successfully!");
     });
   }

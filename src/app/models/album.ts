@@ -1,4 +1,5 @@
 import { Artist } from './artistModel';
+import { Track } from './trackModel';
 
 export class Album 
 {
@@ -7,5 +8,6 @@ export class Album
     name: string;
     type: string;
     imgUri : string;
+    tracks?: Track[];
     artists?: Artist[];
 }

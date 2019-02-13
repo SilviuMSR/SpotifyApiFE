@@ -11,4 +11,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  getDocumentation() {
+    location.href="http://localhost:5000";
+  }
 }
