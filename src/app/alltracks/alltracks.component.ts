@@ -4,6 +4,7 @@ import { ApiService } from '../servicies/api.service';
 import { HttpHeaders } from '@angular/common/http';
 import { TrackServiceService } from '../servicies/track-service.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-alltracks',
@@ -14,7 +15,8 @@ export class AlltracksComponent implements OnInit {
 
   constructor(
     private trackService: TrackServiceService,
-    private route : Router) { }
+    private route : Router,
+    private toastr: ToastrService) { }
 
   allTracks : Track[];
   trackLinks : any;
@@ -72,7 +74,7 @@ export class AlltracksComponent implements OnInit {
   getTrackByName() {
     this.trackService.getTrackByName(this.trackName).subscribe((value: any) => {
       if(value.values.length == 0) {
-        alert("Track not found");
+        this.toastr.error("This track is not existing!");
       }
       this.getTrackContent(value.values[0]);
     })

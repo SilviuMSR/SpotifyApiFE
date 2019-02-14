@@ -60,7 +60,7 @@ import { HomeComponent } from './home/home.component';
     HttpClientModule,
     AngularFontAwesomeModule,
     ToastrModule.forRoot({
-      timeOut: 5000,
+      timeOut: 2000,
       positionClass: 'toast-bottom-left',
       preventDuplicates: true,
     }),

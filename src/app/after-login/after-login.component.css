@@ -138,7 +138,7 @@
     padding: 20px;
   
     animation-name: moveInLeft;
-    animation-duration: 2.5s;
+    animation-duration: 1.5s;
 }
 
   .artist h3 {
@@ -147,7 +147,7 @@
     padding: 20px;
 
     animation-name: moveInLeft;
-    animation-duration: 2.5s;
+    animation-duration: 1.5s;
   }
 
   .track h3 {
@@ -155,7 +155,7 @@
     color: white;
     padding: 20px;
     animation-name: moveInLeft;
-    animation-duration: 2.5s;
+    animation-duration: 1.5s;
   }
 
   #arrow {
